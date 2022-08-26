@@ -1,0 +1,15 @@
+{
+  "compilerOptions": {
+    "target": "es5",
+    "strict": true,
+    "downlevelIteration": true,
+    "baseUrl": ".",
+    "lib": ["es5", "dom"],
+    "types": ["cypress", "cypress-wait-until", "node"]
+  },
+  "include": [
+    "node_modules/cypress",
+    "cypress/**/*.ts",
+    "cypress",
+  ]
+}

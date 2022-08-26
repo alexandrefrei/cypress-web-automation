@@ -1,0 +1,11 @@
+
+#Cypress File
+cypress/results/*
+cypress/reports/*
+cypress/screenshots/*
+cypress/videos/*
+results
+.idea
+
+# Node Dependency directories
+node_modules/

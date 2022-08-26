@@ -1,0 +1,29 @@
+{
+  "name": "cypress-web-automation",
+  "version": "1.0.0",
+  "description": "This is a web automation project using cypress",
+  "main": "index.js",
+  "scripts": {
+    "cy:open:stg": "cypress open --e2e --browser chrome --env configFile=stg",
+    "cy:open:qa": "cypress open --e2e --browser chrome --env configFile=qa"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alexandrefrei/cypress-web-automation.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/alexandrefrei/cypress-web-automation/issues"
+  },
+  "devDependencies": {
+    "@types/node": "^18.7.11",
+    "cypress": "^10.6.0"
+  },
+  "dependencies": {
+    "@types/fs-extra": "^9.0.13",
+    "chance": "^1.1.8",
+    "fs-extra": "^10.1.0",
+    "typescript": "^4.7.4"
+  }
+}

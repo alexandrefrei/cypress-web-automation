@@ -1,20 +1,19 @@
-import { USER, PASSWORD  } from "../support/utils/config";
-import { cartPage } from "cypress/support/pageObjects/CartPage";
-import { checkoutCompletePage } from "cypress/support/pageObjects/CheckoutCompletePage";
-import { checkoutOverviewPage } from "cypress/support/pageObjects/CheckoutOverviewPage";
-import { checkoutPage } from "cypress/support/pageObjects/CheckoutPage";
-import { homePage } from "cypress/support/pageObjects/HomePage";
+import { USER, PASSWORD } from '../support/utils/config';
+import { cartPage } from 'cypress/support/pageObjects/CartPage';
+import { checkoutCompletePage } from 'cypress/support/pageObjects/CheckoutCompletePage';
+import { checkoutOverviewPage } from 'cypress/support/pageObjects/CheckoutOverviewPage';
+import { checkoutPage } from 'cypress/support/pageObjects/CheckoutPage';
+import { homePage } from 'cypress/support/pageObjects/HomePage';
 
-
-describe("Purchase Products", () => {
+describe('Purchase Products', () => {
   let productArray: string[];
   before(() => {
     cy.login(USER, PASSWORD);
   });
 
-  it("Purchase All T-Shirts", () => {
-    homePage.verifyPageOpened();    
-    //const listProducts = ["Sauce Labs Bolt T-Shirt", "Test.allTheThings() T-Shirt (Red)"];        
+  it('Purchase All T-Shirts', () => {
+    homePage.verifyPageOpened();
+    //const listProducts = ["Sauce Labs Bolt T-Shirt", "Test.allTheThings() T-Shirt (Red)"];
     //homePage.selectProductsByName(listProducts);
     productArray = homePage.selectAllTShirt();
     //homePage.numberOfProductAtCart(productArray.length.toString());
@@ -29,7 +28,7 @@ describe("Purchase Products", () => {
 
     checkoutOverviewPage.verifyPageOpened();
     checkoutOverviewPage.clickFinish();
-  
+
     checkoutCompletePage.verifyPageOpened();
     checkoutCompletePage.verifyFinalMessage();
     checkoutCompletePage.verifyOrderDispatched();

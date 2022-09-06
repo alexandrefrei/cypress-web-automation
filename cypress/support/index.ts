@@ -2,14 +2,12 @@
 // load type definitions that come with Cypress module
 /// <reference types="cypress" />
 
-
 declare namespace Cypress {
-    interface Chainable {
+  interface Chainable {
     /**
      * Custom command to perform a login
      * @example cy.login("Admin", "Password");
      */
-    login(user: string, password: string): Chainable<Element>
-    }
+    login(user: string, password: string): Chainable<Element>;
+  }
 }
-  

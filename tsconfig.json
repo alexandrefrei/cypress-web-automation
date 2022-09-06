@@ -5,7 +5,7 @@
     "downlevelIteration": true,
     "baseUrl": ".",
     "lib": ["es5", "dom"],
-    "types": ["cypress", "cypress-wait-until", "node"]
+    "types": ["cypress", "node"]
   },
   "include": [
     "node_modules/cypress",

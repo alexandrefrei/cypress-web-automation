@@ -14,37 +14,35 @@
 // ***********************************************************
 
 // Import commands.js using ES2015 syntax:
-import './commands/commands'
+import './commands/commands';
 
 // Alternatively you can use CommonJS syntax:
 // require('./commands')
 
 before(() => {
-    cy.log("Global Before Hook");
-    setUpRoutes();
-    
-    cy.visit("", { retryOnStatusCodeFailure: true });
-  });
-  
-  function setUpRoutes() {
-    cy.log("setting up routes watcher");
-    
-    //cy.intercept("GET", "/a/api/investment/*/investor").as("investmentInvestor");
-  
-  }
-  
-  Cypress.on("uncaught:exception", (err, runnable) => {
-    // returning false here prevents Cypress from
-    // failing the test
-    return false;
-  });
-  
-  Cypress.on("fail", (error, runnable) => {
-    // eslint-disable-next-line no-debugger
-    debugger;
-    // we now have access to the err instance
-    // and the mocha runnable this failed on
-  
-    throw error; // throw error to have test still fail
-  });
-  
+  cy.log('Global Before Hook');
+  setUpRoutes();
+
+  cy.visit('', { retryOnStatusCodeFailure: true });
+});
+
+function setUpRoutes() {
+  cy.log('setting up routes watcher');
+
+  //cy.intercept("GET", "/a/api/investment/*/investor").as("investmentInvestor");
+}
+
+Cypress.on('uncaught:exception', (err, runnable) => {
+  // returning false here prevents Cypress from
+  // failing the test
+  return false;
+});
+
+Cypress.on('fail', (error, runnable) => {
+  // eslint-disable-next-line no-debugger
+  debugger;
+  // we now have access to the err instance
+  // and the mocha runnable this failed on
+
+  throw error; // throw error to have test still fail
+});

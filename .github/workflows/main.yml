@@ -42,5 +42,4 @@ jobs:
       - name: Cypress run 
         uses: cypress-io/github-action@v2
         with:
-          config-file: ${{github.event.inputs.environment || env.DEFAULT_ENV}}
-          browser: ${{github.event.inputs.browser || env.DEFAULT_BROWSER}}
+          command: npx cypress run --browser ${{github.event.inputs.browser || env.DEFAULT_BROWSER}} --env configFile=${{github.event.inputs.environment || env.DEFAULT_ENV}}

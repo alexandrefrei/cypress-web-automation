@@ -1,0 +1,44 @@
+name: Cypress UI tests
+
+on:
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Select the environment to run the tests: DEV / STG / PROD'
+        required: true
+        type: environment
+        default: 'STG'
+      browser:
+        description: 'Select the  browser to run the tests: chrome / electron'
+        required: true
+        default: 'chrome'
+      tag:
+        description: 'Test scenario tags: @regressivo / @smoke / @login'
+        required: false
+        default: '@regressivo'
+  pull_request:
+    branches: [ master, release/develop ]
+  schedule:
+    - cron: "0 0 * * *"
+    
+env:
+  DEFAULT_ENV: "STG"
+  DEFAULT_BROWSER: "chrome"
+  DEFAULT_TAG: "@regressivo"
+
+jobs:
+  cypress_test:
+    name: Cypress run
+    runs-on: ubuntu-latest
+    container: cypress/browsers:node14.16.0-chrome90-ff88
+    steps:
+      - uses: actions/checkout@v3
+      - name: Call a Bash Script
+        run: cp env/cypress.${github.event.inputs.environment}.json cypress.env.json
+        shell: bash
+      - name: Cypress run 
+        uses: cypress-io/github-action@v2
+        with:
+          config-file: ${{github.event.inputs.environment || env.DEFAULT_ENV}}
+        with:
+          browser: ${{github.event.inputs.browser || env.DEFAULT_BROWSER}}

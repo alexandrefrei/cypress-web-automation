@@ -36,7 +36,7 @@ jobs:
         uses: actions/checkout@v3
       # 
       - name: Call a Bash Script
-        run: cp env/cypress.${{github.event.inputs.environment}}.json cypress.env.json
+        run: cp env/cypress.${{github.event.inputs.environment || env.DEFAULT_ENV}}.json cypress.env.json
         shell: bash
       #
       - name: Cypress run 

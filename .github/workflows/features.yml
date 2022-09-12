@@ -18,7 +18,7 @@ env:
   DEFAULT_BROWSER: "chrome"
 
 jobs:
-  test:
+  feature_job:
     name: Running tests on feature mode
     # Setting the OS to run the cypress tests
     runs-on: ubuntu-latest
@@ -32,11 +32,6 @@ jobs:
       - name: Copying data to cypress.env.json
         run: cp env/cypress.${{github.event.inputs.environment || env.DEFAULT_ENV}}.json cypress.env.json
         shell: bash
-      #
-      - name: Cypress info
-        uses: ./
-        with:
-          buid: npx cypress info
       #
       - name: Cypress run 
         uses: cypress-io/github-action@v2

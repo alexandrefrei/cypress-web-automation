@@ -3,6 +3,9 @@
   "env": {
     "environment": "staging"
   },
+  "User": "standard_user",
+  "Name": "Standard",
+  "Password": "secret_sauce",
   "execTimeout": 18000,
   "defaultCommandTimeout": 300000,
   "requestTimeout": 10000,

@@ -34,13 +34,6 @@ jobs:
       #
       - name: Checkout
         uses: actions/checkout@v3
-      #
-      - name: Cypress info
-        uses: ./
-        with:
-          # just for full picture after installing Cypress
-          # print information about detected browsers, etc
-          build: npx cypress info
       # 
       - name: Call a Bash Script
         run: cp env/cypress.${{github.event.inputs.environment}}.json cypress.env.json

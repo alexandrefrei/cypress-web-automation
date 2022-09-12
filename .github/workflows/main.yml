@@ -39,5 +39,4 @@ jobs:
         uses: cypress-io/github-action@v2
         with:
           config-file: ${{github.event.inputs.environment || env.DEFAULT_ENV}}
-        with:
           browser: ${{github.event.inputs.browser || env.DEFAULT_BROWSER}}

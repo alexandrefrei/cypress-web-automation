@@ -23,7 +23,7 @@ jobs:
     # Setting the OS to run the cypress tests
     runs-on: ubuntu-latest
     # Setting the Docker container
-    container: cypress/included:10.7.0
+    container: cypress/browsers:latest
     steps:
       #
       - name: Checkout

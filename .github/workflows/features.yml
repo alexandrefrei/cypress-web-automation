@@ -1,4 +1,4 @@
-name: Features
+name: Feature mode
 on:
   workflow_dispatch:
     inputs:
@@ -19,7 +19,7 @@ env:
 
 jobs:
   test:
-    name: Running features tests
+    name: Running tests on feature mode
     # Setting the OS to run the cypress tests
     runs-on: ubuntu-latest
     # Setting the Docker container
@@ -36,7 +36,7 @@ jobs:
       - name: Cypress info
         uses: ./
         with:
-          command: npx cypress info
+          buid: npx cypress info
       #
       - name: Cypress run 
         uses: cypress-io/github-action@v2

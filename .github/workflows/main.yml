@@ -4,10 +4,9 @@ on:
   workflow_dispatch:
     inputs:
       environment:
-        description: 'Select the environment to run the tests: DEV / STG / PROD'
+        description: 'Select the environment to run the tests: dev / stg / prod'
         required: true
-        type: environment
-        default: 'STG'
+        default: 'stg'
       browser:
         description: 'Select the  browser to run the tests: chrome / electron'
         required: true
@@ -22,7 +21,7 @@ on:
     - cron: "0 0 * * *"
     
 env:
-  DEFAULT_ENV: "STG"
+  DEFAULT_ENV: "stg"
   DEFAULT_BROWSER: "chrome"
   DEFAULT_TAG: "@regressivo"
 

@@ -1,0 +1,45 @@
+name: Features
+on:
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Select the environment to run the tests: dev / stg / prod'
+        required: true
+        default: 'stg'
+      browser:
+        description: 'Select the  browser to run the tests: chrome / electron'
+        required: true
+        default: 'chrome'
+      specs:
+        description: 'Add the spec that you want to run:'
+        required: true    
+env:
+  DEFAULT_ENV: "stg"
+  DEFAULT_BROWSER: "chrome"
+
+jobs:
+  test:
+    name: Running features tests
+    # Setting the OS to run the cypress tests
+    runs-on: ubuntu-latest
+    # Setting the Docker container
+    container: cypress/included:10.7.0
+    steps:
+      #
+      - name: Checkout
+        uses: actions/checkout@v3
+      # 
+      - name: Copying data to cypress.env.json
+        run: cp env/cypress.${{github.event.inputs.environment}}.json cypress.env.json
+        shell: bash
+      #
+      - name: Cypress info
+        uses: ./
+        with:
+          command: npx cypress info
+      #
+      - name: Cypress run 
+        uses: cypress-io/github-action@v2
+        with:
+          command: npx cypress run --browser ${{github.event.inputs.browser || env.DEFAULT_BROWSER}} --env configFile=${{github.event.inputs.environment || env.DEFAULT_ENV}}
+          spec: ${{github.event.inputs.specs}}

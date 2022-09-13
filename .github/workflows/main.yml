@@ -40,7 +40,7 @@ jobs:
       - name: Cypress run 
         uses: cypress-io/github-action@v2
         with:
-          command: npx cypress run --browser ${{github.event.inputs.browser || env.DEFAULT_BROWSER}} --env configFile=${{github.event.inputs.environment || env.DEFAULT_ENV}}
+          command: npx cypress run --browser ${{github.event.inputs.browser || env.DEFAULT_BROWSER}} --env configFile=${{github.event.inputs.environment || env.DEFAULT_ENV}} allure=true
       #
       - name: Get Allure history
         uses: actions/checkout@v2

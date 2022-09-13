@@ -76,6 +76,6 @@ jobs:
           context: 'Test report'
           state: 'success'
           sha: ${{ github.event.pull_request.head.sha }}
-          target_url: simple-elf.github.io/github-allure-history/${{ github.run_number }}
+          target_url: https://alexandrefrei.github.io/cypress-web-automation/${{ github.run_number }}
 
 

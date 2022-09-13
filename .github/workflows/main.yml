@@ -33,7 +33,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
       # 
-      - name: Call a Bash Script
+      - name: Copying data to cypress.env.json
         run: cp env/cypress.${{github.event.inputs.environment || env.DEFAULT_ENV}}.json cypress.env.json
         shell: bash
       #

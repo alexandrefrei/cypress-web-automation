@@ -6,6 +6,8 @@ cypress/screenshots/*
 cypress/videos/*
 results
 .idea
+allure-results
+allure-report
 
 # Node Dependency directories
 node_modules/

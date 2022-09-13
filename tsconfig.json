@@ -5,7 +5,8 @@
     "downlevelIteration": true,
     "baseUrl": ".",
     "lib": ["es5", "dom"],
-    "types": ["cypress", "node"]
+    "noEmit": true,
+    "types": ["cypress", "node", "@shelex/cypress-allure-plugin"]
   },
   "include": [
     "node_modules/cypress",

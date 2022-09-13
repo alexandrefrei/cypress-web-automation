@@ -4,10 +4,19 @@
   "description": "This is a web automation project using cypress",
   "main": "index.js",
   "scripts": {
-    "cy:open:stg": "cypress open --e2e --browser chrome --env configFile=stg",
-    "cy:open:qa": "cypress open --e2e --browser chrome --env configFile=qa",
+    "cy:open_stg": "cypress open --e2e --browser chrome --env configFile=stg",
+    "cy:open_qa": "cypress open --e2e --browser chrome --env configFile=qa",
+    "cy:run_allure": "cypress run --browser chrome --env configFile=stg allure=true",
+
+    "allure:ALL": "npm run allure:generate && npm run allure:open",
+    "allure:clear_windows": "if exist allure-results rmdir /s /q allure-results && if exist allure-report rmdir /s /q allure-report",
+    "allure:generate": "allure generate --clean allure-results",
+    "allure:open": "allure open allure-report",
+
+    "allure:clear": "rm -r allure-results/ allure-report || true",
     "prettier-check": "prettier --config .prettierrc cypress/**/*.{js,ts} --check",
-    "prettier-write": "prettier --config .prettierrc cypress/**/*.{js,ts} --write"
+    "prettier-write": "prettier --config .prettierrc cypress/**/*.{js,ts} --write",
+    "cy:run_mochawosome": "cypress run --browser chrome --env configFile=stg"
   },
   "repository": {
     "type": "git",
@@ -19,8 +28,12 @@
     "url": "https://github.com/alexandrefrei/cypress-web-automation/issues"
   },
   "devDependencies": {
+    "@shelex/cypress-allure-plugin": "^2.31.0",
     "@types/node": "^18.7.11",
-    "cypress": "^10.6.0"
+    "allure-commandline": "^2.18.1",
+    "cypress": "^10.6.0",
+    "cypress-mochawesome-reporter": "^3.2.2",
+    "mocha-allure-reporter": "^1.4.0"
   },
   "dependencies": {
     "@types/fs-extra": "^9.0.13",

@@ -1,21 +1,32 @@
+const AllureWriter = require('@shelex/cypress-allure-plugin/writer');
 import { defineConfig } from 'cypress'
 const fs = require('fs-extra');
 const path = require('path');
-/*
-import fs from "fs-extra";
-*/
+
 
 export default defineConfig({
+  /*reporter: 'cypress-mochawesome-reporter',
+  video: false,
+  reporterOptions: {
+    charts: true,
+    reportDir: 'cypress/report',
+    reportPageTitle: 'custom-title',
+    embeddedScreenshots: true,
+    inlineAssets: true,
+    saveAllAttempts: false,
+  },*/
   e2e: {
     setupNodeEvents(on, config) {
-      const environment: string = config.env.configFile || "staging";
-      console.log(environment);
+      //require('cypress-mochawesome-reporter/plugin')(on);
+      AllureWriter(on, config);
 
+      const environment: string = config.env.configFile || "staging";
       const configurationForEnvironment = fetchConfigurationByFile(environment);
       return configurationForEnvironment || config;
     },
     specPattern: 'cypress/e2e/**/*spec.{js,ts}',
-    excludeSpecPattern: ['*.page.js', 'utils.js', '*.d.ts'],
+    //excludeSpecPattern: ['*.page.js', 'utils.js', '*.d.ts'],
+    video: false,
   }
 })
 

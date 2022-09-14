@@ -19,6 +19,7 @@
     "cy:run_mochawosome": "cypress run --browser chrome --env configFile=stg"
   },
   "author": "",
+  "license": "ISC",
   "devDependencies": {
     "@shelex/cypress-allure-plugin": "^2.31.0",
     "@types/node": "^18.7.11",
@@ -31,7 +32,7 @@
     "eslint-config-standard-with-typescript": "^23.0.0",
     "eslint-plugin-import": "^2.26.0",
     "eslint-plugin-promise": "^6.0.1",
-    "husky": "^8.0.1",
+    "husky": "^8.0.0",
     "lint-staged": "^13.0.3",
     "mocha-allure-reporter": "^1.4.0"
   },
@@ -44,7 +45,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "echo pre-commit"
+      "pre-commit": "lint-staged"
     }
   },
   "lint-staged": {

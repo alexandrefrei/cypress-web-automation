@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import {
   generateFirstName,
   generateLastName,
@@ -6,7 +5,6 @@ import {
 } from '../utils/TextGenerator';
 
 const CART_TITLE = "span[class='title']";
-const CANCEL_BUTTON = '#cancel';
 const CONTINUE_BUTTON = '#continue';
 
 const FIRST_NAME = '#first-name';

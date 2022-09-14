@@ -18,8 +18,6 @@ class CheckoutOverviewPage {
   clickFinish(): void {
     cy.get(FINISH_BUTTON).click();
   }
-
-  verifyProductsInformation(): void {}
 }
 
 export const checkoutOverviewPage = new CheckoutOverviewPage();

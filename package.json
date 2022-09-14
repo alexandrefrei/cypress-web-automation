@@ -6,6 +6,7 @@
   "scripts": {
     "cy:open_stg": "cypress open --e2e --browser chrome --env configFile=stg",
     "cy:open_qa": "cypress open --e2e --browser chrome --env configFile=qa",
+    "cy:run": "cypress run --browser chrome --env configFile=stg",
     "cy:run_allure": "cypress run --browser chrome --env configFile=stg allure=true",
     "allure:ALL": "npm run allure:generate && npm run allure:open",
     "allure:generate": "allure generate allure-results",

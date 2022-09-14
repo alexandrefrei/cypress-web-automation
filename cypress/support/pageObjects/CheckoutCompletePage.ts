@@ -1,6 +1,4 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 const CART_TITLE = "span[class='title']";
-const BACK_BUTTON = '#back-to-products';
 
 const FINAL_MESSAGE = "h2[class='complete-header']";
 const ORDER_DISPATCHED = "div[class='complete-text']";

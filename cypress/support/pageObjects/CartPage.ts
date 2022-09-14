@@ -12,8 +12,6 @@ class CartPage {
   clickCheckout(): void {
     cy.get(CHECKOUT_BUTTON).click();
   }
-
-  verifyProducts(): void {}
 }
 
 export const cartPage = new CartPage();

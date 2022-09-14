@@ -36,15 +36,11 @@ class HomePage {
             //cy.get(ADD_CART_BUTTON).should("have.text","Remove");
             //cy.log(item.text().toString()).debug();
             //var value = item.text().toString();
-            //cy.log("aqui é o valor: "+value);
+            //cy.log("Here is the value: "+value);
             //productArray[0] = "TESTE";
           });
       });
-    //productArray[0] = "TESTE2";
     cy.log('First value: ' + productArray[0]);
-    //cy.log(productArray[1]);
-
-    //cy.log(productArray);
     return productArray;
   }
 

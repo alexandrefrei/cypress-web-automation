@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-empty-function */
+/* eslint-disable @typescript-eslint/no-unused-vars */
 const CART_TITLE = "span[class='title']";
 const CANCEL_BUTTON = '#cancel';
 const FINISH_BUTTON = '#finish';

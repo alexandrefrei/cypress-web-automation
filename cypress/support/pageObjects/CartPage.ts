@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-empty-function */
 const CART_TITLE = "span[class='title'";
 const CHECKOUT_BUTTON = '#checkout';
 

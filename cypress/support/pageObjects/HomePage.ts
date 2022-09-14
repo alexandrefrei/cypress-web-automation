@@ -21,7 +21,7 @@ class HomePage {
   }
 
   selectAllTShirt(): string[] {
-    let productArray: string[] = [];
+    const productArray: string[] = [];
 
     cy.get(PRODUCT_NAME)
       .filter(`:contains("T-Shirt")`)

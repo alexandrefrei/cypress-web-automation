@@ -1,5 +1,6 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
 import dayjs = require('dayjs');
-var Chance = require('chance');
+const Chance = require('chance');
 
 // Instantiate Chance so it can be used
 export const CHANCE = new Chance();

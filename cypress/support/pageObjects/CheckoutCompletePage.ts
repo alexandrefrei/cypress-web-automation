@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 const CART_TITLE = "span[class='title']";
 const BACK_BUTTON = '#back-to-products';
 

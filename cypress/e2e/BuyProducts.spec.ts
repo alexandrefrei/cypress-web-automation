@@ -6,6 +6,7 @@ import { checkoutPage } from 'cypress/support/pageObjects/CheckoutPage';
 import { homePage } from 'cypress/support/pageObjects/HomePage';
 
 describe('Purchase Products', () => {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   let productArray: string[];
   before(() => {
     cy.login(USER, PASSWORD);

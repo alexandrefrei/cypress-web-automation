@@ -33,6 +33,5 @@ describe('Purchase Products', () => {
     checkoutCompletePage.verifyPageOpened();
     checkoutCompletePage.verifyFinalMessage();
     checkoutCompletePage.verifyOrderDispatched();
-  
   });
 });

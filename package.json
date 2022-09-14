@@ -7,32 +7,32 @@
     "cy:open_stg": "cypress open --e2e --browser chrome --env configFile=stg",
     "cy:open_qa": "cypress open --e2e --browser chrome --env configFile=qa",
     "cy:run_allure": "cypress run --browser chrome --env configFile=stg allure=true",
-
     "allure:ALL": "npm run allure:generate && npm run allure:open",
-    "allure:clear_windows": "if exist allure-results rmdir /s /q allure-results && if exist allure-report rmdir /s /q allure-report",
-    "allure:generate": "allure generate --clean allure-results",
+    "allure:generate": "allure generate allure-results",
     "allure:open": "allure open allure-report",
-
+    "allure:clear_windows": "if exist allure-results rmdir /s /q allure-results && if exist allure-report rmdir /s /q allure-report",
     "allure:clear": "rm -r allure-results/ allure-report || true",
-    "prettier-check": "prettier --config .prettierrc cypress/**/*.{js,ts} --check",
-    "prettier-write": "prettier --config .prettierrc cypress/**/*.{js,ts} --write",
+    "prettier-check": "prettier --config .prettierrc --check cypress/**/*.{js,ts}",
+    "prettier-write": "prettier --config .prettierrc --write cypress/**/*.{js,ts}",
+    "lint-check": "eslint --config .eslintrc.json . --ext .ts",
+    "lint-fix": "eslint . --cache --fix",
     "cy:run_mochawosome": "cypress run --browser chrome --env configFile=stg"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/alexandrefrei/cypress-web-automation.git"
-  },
   "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/alexandrefrei/cypress-web-automation/issues"
-  },
   "devDependencies": {
     "@shelex/cypress-allure-plugin": "^2.31.0",
     "@types/node": "^18.7.11",
+    "@typescript-eslint/eslint-plugin": "^5.37.0",
+    "@typescript-eslint/parser": "^5.37.0",
     "allure-commandline": "^2.18.1",
     "cypress": "^10.6.0",
     "cypress-mochawesome-reporter": "^3.2.2",
+    "eslint": "^8.23.1",
+    "eslint-config-standard-with-typescript": "^23.0.0",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-promise": "^6.0.1",
+    "husky": "^8.0.1",
+    "lint-staged": "^13.0.3",
     "mocha-allure-reporter": "^1.4.0"
   },
   "dependencies": {
@@ -41,5 +41,16 @@
     "fs-extra": "^10.1.0",
     "prettier": "^2.7.1",
     "typescript": "^4.7.4"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "cypress/**/*.{js,ts,json,md}": [
+      "yarn prettier-write",
+      "yarn lint-fix"
+    ]
   }
 }

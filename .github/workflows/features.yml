@@ -23,8 +23,8 @@ jobs:
     # Setting the OS to run the cypress tests
     runs-on: ubuntu-latest
     # Setting the Docker container
-    container: 
-      image: cypress/browsers:node18.6.0-chrome105-ff104
+    #container: 
+      #image: cypress/browsers:node18.6.0-chrome105-ff104
     #
     steps:
       #

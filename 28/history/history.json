@@ -1,1 +1,0 @@
-{"58504702c90aae635ccbcffc1835f991":{"statistic":{"failed":0,"broken":0,"skipped":0,"passed":1,"unknown":0,"total":1},"items":[{"uid":"81ecc1073ad1d2af","reportUrl":"https://alexandrefrei.github.io/cypress-web-automation/28//#testresult/81ecc1073ad1d2af","status":"passed","time":{"start":1663635673077,"stop":1663635675199,"duration":2122}}]}}

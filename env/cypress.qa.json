@@ -1,5 +1,6 @@
 { 
  "baseUrl": "https://automationpractice.com",
+ "baseUrl2": "https://www.saucedemo.com",
   "env": {
     "environment": "staging"
   },

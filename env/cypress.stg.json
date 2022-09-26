@@ -1,6 +1,15 @@
 { 
- "baseUrl": "https://www.saucedemo.com",
+ "baseUrl": "https://www.google.com",
   "environment": "staging",
+  "env": {
+    "db": {
+      "host": "sql10.freemysqlhosting.net",
+      "user": "sql10522347",
+      "password": "SsmFiBhnkF",
+      "database": "sql10522347",
+      "port": 3306
+    }
+  },
   "allure": true,
   "user": "standard_user",
   "name": "Standard",

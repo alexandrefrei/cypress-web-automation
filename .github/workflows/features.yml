@@ -31,9 +31,9 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
       # 
-      - name: Copying data to cypress.env.json
-        run: cp env/cypress.${{github.event.inputs.environment || env.DEFAULT_ENV}}.json cypress.env.json
-        shell: bash
+      #- name: Copying data to cypress.env.json
+       # run: cp env/cypress.${{github.event.inputs.environment || env.DEFAULT_ENV}}.json cypress.env.json
+        #shell: bash
         
       - name: Copy data from Secrets to cypress.env.json
         run: echo '${{ secrets.CYPRESS_ENV_STAGE }}' > cypress.env.json

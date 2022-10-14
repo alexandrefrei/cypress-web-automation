@@ -38,7 +38,6 @@ jobs:
       - name: Copy data from Secrets to cypress.env.json
          run:|
           echo '${{ secrets.CYPRESS_ENV_STAGE }}' > cypress.env.json
-      
       #
       - name: Cypress run 
         uses: cypress-io/github-action@v4

@@ -1,7 +1,10 @@
 { 
   "baseUrl": "https://automationpractice.com",
-  "environment": "staging",
   "env": {
+    "environment": "staging",
+    "user": "standard_user",
+    "name": "Standard",
+    "password": "secret_sauce",
     "db": {
       "host": "sql10.freemysqlhosting.net",
       "user": "sql10522347",
@@ -10,9 +13,6 @@
       "port": 3306
     }
   },
-  "user": "standard_user",
-  "name": "Standard",
-  "password": "secret_sauce",
   "allure": true,
   "execTimeout": 18000,
   "defaultCommandTimeout": 300000,

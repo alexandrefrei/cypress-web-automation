@@ -1,5 +1,6 @@
 const AllureWriter = require('@shelex/cypress-allure-plugin/writer');
 import { defineConfig } from 'cypress'
+import { readFileSync } from 'fs';
 const fs = require('fs-extra');
 const path = require('path');
 const mysql = require('mysql');
@@ -24,25 +25,26 @@ export default defineConfig({
         queryDatabase( query ) {
             return executeQuery(query, config.env);  
          },
-      }); //For running sql query
-
+      }) //For running sql query
 
       //require('cypress-mochawesome-reporter/plugin')(on);
       AllureWriter(on, config);
 
       const environment: string = config.env.configFile || "staging";
       const configurationForEnvironment = fetchConfigurationByFile(environment);
-      return configurationForEnvironment || config;
+      console.log(configurationForEnvironment);
+      return configurationForEnvironment;
     },
     specPattern: 'cypress/e2e/**/*spec.{js,ts}',
     //excludeSpecPattern: ['*.page.js', 'utils.js', '*.d.ts'],
     video: false,
-  }
+  },
+ //Whether Cypress will trash assets within the downloadsFolder, screenshotsFolder, and videosFolder before tests run with cypress run.
+  trashAssetsBeforeRuns: true
 })
 
 function fetchConfigurationByFile(file: string)  {
   const pathToConfigFile = path.resolve("env", `cypress.${file}.json`);
-
   return fs.readJson(pathToConfigFile);
 }
 
@@ -54,7 +56,6 @@ function executeQuery(query, config) {
   connection.connect();
 
   //execute query + disconnect to db as a Promise
-
   return new Promise((resolve, reject) => {
     connection.query(query, (error, results) => {
       console.log('Executing query...');
@@ -70,5 +71,29 @@ function executeQuery(query, config) {
       connection.end();
     })
   })
-
 }
+
+
+/* MY-SQL
+function runQuery(query, env, allowEmpty) {
+  //console.log("Creating DB connection");
+  const connection = mysql.createConnection(env);
+  connection.connect();
+  //console.log("Executing query");
+  return new Promise((resolve, reject) => {
+    connection.query(query, (error, results) => {
+      if (error) reject("Error executing query");
+      else {
+        if (query.includes("UPDATE")) {
+          resolve(results);
+        } else {
+          results.length > 0 || allowEmpty
+            ? resolve(results)
+            : reject("Empty results");
+        }
+      }
+      //console.log("Ending DB connection");
+      connection.end();
+    });
+  });
+} */

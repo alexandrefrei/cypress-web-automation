@@ -36,13 +36,13 @@ jobs:
         #shell: bash
         
       - name: Copy data from Secrets to cypress.env.json I
-        if: github.event.inputs.environment == "STAGE"
+        if: github.event.inputs.environment == 'STAGE'
         run:
           echo "RUNNING STAGE"
           #echo '${{ secrets.CYPRESS_ENV_STAGE }}' > cypress.env.json
           
       - name: Copy data from Secrets to cypress.env.json II 
-        if: github.event.inputs.environment == "PROD"
+        if: github.event.inputs.environment == 'PROD'
         run: 
           echo "RUNNING PROD"
       #

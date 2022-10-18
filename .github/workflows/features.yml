@@ -37,10 +37,8 @@ jobs:
           echo "RUNNING PROD"
           
       - name: Copy data from Secrets to cypress.env.json III 
-        env:
-          ENVIRONMENT: ${{github.event.inputs.environment}}
         run: |
-          echo ${{ secrets.CYPRESS_ENV_$ENVIRONMENT }} > cypress.env.json
+          echo ${{ secrets.CYPRESS_ENV_${{github.event.inputs.environment}} }} > cypress.env.json
       #
       - name: Cypress run 
         uses: cypress-io/github-action@v4

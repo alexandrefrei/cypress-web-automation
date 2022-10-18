@@ -30,17 +30,17 @@ jobs:
       #- name: Copying data to cypress.env.json
        # run: cp env/cypress.${{github.event.inputs.environment || env.DEFAULT_ENV}}.json cypress.env.json
         #shell: bash
-        
-      - name: Conditional to run on STAGE - Copy data from Secrets to cypress.env.json
-        if: github.event.inputs.environment == 'STAGE'
-        run: |
-          echo 'RUNNING STAGE - secrets.CYPRESS_ENV_${{github.event.inputs.environment}}'
-          echo '${{secrets.CYPRESS_ENV_STAGE}}' > cypress.env.json
-          
+       
       - name: Conditional to run on PROD - Copy data from Secrets to cypress.env.json II 
         if: github.event.inputs.environment == 'PROD'
         run: 
           echo "RUNNING PROD"
+          
+      - name: Copy data from Secrets to cypress.env.json III 
+        env:
+          ENVIRONMENT: ${{github.event.inputs.environment}}
+        run: |
+          echo ${{ secrets.CYPRESS_ENV_$ENVIRONMENT }} > cypress.env.json
       #
       - name: Cypress run 
         uses: cypress-io/github-action@v4

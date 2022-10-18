@@ -26,25 +26,26 @@ jobs:
       #
       - name: Checkout
         uses: actions/checkout@v3
-      # 
-      #- name: Copying data to cypress.env.json
-       # run: cp env/cypress.${{github.event.inputs.environment || env.DEFAULT_ENV}}.json cypress.env.json
-        #shell: bash
-       
-      - name: Conditional to run on STAGE - Copy data from Secrets to cypress.env.json
+      #  
+      - name: Conditional to run on STAGE - Copy data from Secrets to cypress.${{github.event.inputs.environment}}.json
         if: github.event.inputs.environment == 'STAGE'
         run: |
-          echo '${{ secrets.CYPRESS_ENV_STAGE }}' > cypress.env.json
+          echo '${{ secrets.CYPRESS_ENV_STAGE }}' > env/cypress.${{github.event.inputs.environment}}.json
   
-      - name: Conditional to run on PROD - Copy data from Secrets to cypress.env.json II 
+      - name: Conditional to run on PROD - Copy data from Secrets to cypress.env.json 
         if: github.event.inputs.environment == 'PROD'
         run: 
           echo "RUNNING PROD"
       #
+      - name: Copying data to cypress.env.json
+        run: cp env/cypress.${{github.event.inputs.environment}}.json cypress.env.json
+        shell: bash
+      
+      
       - name: Cypress run 
         uses: cypress-io/github-action@v4
         with:
-          command: npx cypress run --browser ${{github.event.inputs.browser || env.DEFAULT_BROWSER}} --env configFile=${{github.event.inputs.environment || env.DEFAULT_ENV}}
+          command: npx cypress run --browser ${{github.event.inputs.browser}} --env configFile=${{github.event.inputs.environment}}
           spec: ${{github.event.inputs.specs}}
       #
       - name: Get Allure history

@@ -3,9 +3,9 @@ on:
   workflow_dispatch:
     inputs:
       environment:
-        description: 'Select the environment to run the tests: DEV / STAGE / PROD'
+        description: 'Select the environment to run the tests: dev / stage / prod'
         required: true
-        default: 'STAGE'
+        default: 'stage'
       browser:
         description: 'Select the  browser to run the tests: chrome / firefox'
         required: true
@@ -28,12 +28,12 @@ jobs:
         uses: actions/checkout@v3
       #  
       - name: Conditional to run on STAGE - Copy data from Secrets to cypress.${{github.event.inputs.environment}}.json
-        if: github.event.inputs.environment == 'STAGE'
+        if: github.event.inputs.environment == 'stage'
         run: |
           echo '${{ secrets.CYPRESS_ENV_STAGE }}' > env/cypress.${{github.event.inputs.environment}}.json
   
       - name: Conditional to run on PROD - Copy data from Secrets to cypress.env.json 
-        if: github.event.inputs.environment == 'PROD'
+        if: github.event.inputs.environment == 'prod'
         run: 
           echo "RUNNING PROD"
           

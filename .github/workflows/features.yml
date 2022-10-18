@@ -34,10 +34,8 @@ jobs:
       - name: Conditional to run on STAGE - Copy data from Secrets to cypress.env.json
         if: github.event.inputs.environment == 'STAGE'
         run: 
-          echo '${{secrets.CYPRESS_ENV_STAGE}}' > cypress.env.json
-          echo '${{secrets.CYPRESS_ENV_STAGE}}' | base64 -d > data.txt
-          
-       
+          echo Copy data '${{secrets.CYPRESS_ENV_STAGE}}' > cypress.env.json
+  
       - name: Conditional to run on PROD - Copy data from Secrets to cypress.env.json II 
         if: github.event.inputs.environment == 'PROD'
         run: 

@@ -36,7 +36,8 @@ jobs:
         #shell: bash
         
       - name: Copy data from Secrets to cypress.env.json
-        run: echo 'Here is the secrets ${{ secrets.CYPRESS_ENV_github.event.inputs.environment }}'
+        run: echo 'Here ${{ secrets.CYPRESS_ENV_github.event.inputs.environment }}'
+          echo 'Here is the secrets ${{ CYPRESS_ENV_github.event.inputs.environment }}'
           echo '${{ secrets.CYPRESS_ENV_github.event.inputs.environment }}' > cypress.env.json
       #
       - name: Cypress run 

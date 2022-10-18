@@ -36,12 +36,7 @@ jobs:
         if: github.event.inputs.environment == 'PROD'
         run: 
           echo "RUNNING PROD"
-      #
-      - name: Copying data to cypress.env.json
-        run: cp env/cypress.${{github.event.inputs.environment}}.json cypress.env.json
-        shell: bash
-      
-      
+          
       - name: Cypress run 
         uses: cypress-io/github-action@v4
         with:

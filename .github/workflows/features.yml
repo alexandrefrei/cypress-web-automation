@@ -3,9 +3,9 @@ on:
   workflow_dispatch:
     inputs:
       environment:
-        description: 'Select the environment to run the tests: dev / stg / prod'
+        description: 'Select the environment to run the tests: DEV / STAGE / PROD'
         required: true
-        default: 'stg'
+        default: 'STAGE'
       browser:
         description: 'Select the  browser to run the tests: chrome / firefox'
         required: true
@@ -36,7 +36,7 @@ jobs:
         #shell: bash
         
       - name: Copy data from Secrets to cypress.env.json
-        run: echo '${{ secrets.CYPRESS_ENV_STAGE }}' > cypress.env.json
+        run: echo '${{ secrets.CYPRESS_ENV_${{github.event.inputs.environment }} }}' > cypress.env.json
       #
       - name: Cypress run 
         uses: cypress-io/github-action@v4

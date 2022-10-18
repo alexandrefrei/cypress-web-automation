@@ -33,14 +33,18 @@ jobs:
         
       - name: Conditional to run on STAGE - Copy data from Secrets to cypress.env.json
         if: github.event.inputs.environment == 'STAGE'
-        run:
-          echo "RUNNING STAGE -" secrets.CYPRESS_ENV_${{github.event.inputs.environment}}
-          echo '${{ secrets.CYPRESS_ENV_STAGE }}' > cypress.env.json
+        run: |
+          echo 'RUNNING STAGE - secrets.CYPRESS_ENV_${{github.event.inputs.environment}}'
           
       - name: Conditional to run on PROD - Copy data from Secrets to cypress.env.json II 
         if: github.event.inputs.environment == 'PROD'
         run: 
           echo "RUNNING PROD"
+          
+      - name: Copy data from Secrets to cypress.env.json III 
+        run: |
+          echo "COPY"
+          echo secrets.CYPRESS_ENV_${{github.event.inputs.environment}} > cypress.env.json
       #
       - name: Cypress run 
         uses: cypress-io/github-action@v4

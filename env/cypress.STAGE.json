@@ -1,4 +1,18 @@
 { 
+  "baseUrl": "https://automationpractice.com",
+  "env": {
+    "environment": "staging",
+    "user": "standard_user",
+    "name": "Standard",
+    "password": "secret_sauce",
+    "db": {
+      "host": "sql10.freemysqlhosting.net",
+      "user": "sql10522347",
+      "password": "SsmFiBhnkF",
+      "database": "sql10522347",
+      "port": 3306
+    }
+  },
   "allure": true,
   "execTimeout": 18000,
   "defaultCommandTimeout": 300000,

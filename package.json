@@ -4,7 +4,7 @@
   "description": "This is a web automation project using cypress",
   "main": "index.js",
   "scripts": {
-    "cy:open_stg": "cypress open --e2e --browser chrome --env configFile=stg",
+    "cy:open_stg": "cypress open --e2e --browser chrome --env configFile=stage",
     "cy:open_qa": "cypress open --e2e --browser chrome --env configFile=qa",
     "cy:run": "cypress run --browser chrome --env configFile=stg",
     "cy:run_allure": "cypress run --browser chrome --env configFile=stg allure=true",

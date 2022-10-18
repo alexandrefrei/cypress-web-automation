@@ -30,7 +30,7 @@ export default defineConfig({
       //require('cypress-mochawesome-reporter/plugin')(on);
       AllureWriter(on, config);
 
-      const environment: string = config.env.configFile || "staging";
+      const environment: string = config.env.configFile || "stage";
       const configurationForEnvironment = fetchConfigurationByFile(environment);
       console.log(configurationForEnvironment);
       return configurationForEnvironment;

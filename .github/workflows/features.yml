@@ -13,10 +13,6 @@ on:
       specs:
         description: 'Add the spec that you want to run:'
         required: true    
-env:
-  DEFAULT_ENV: "STAGE"
-  DEFAULT_BROWSER: "chrome"
-
 jobs:
   feature-job:
     name: Running tests on feature mode
@@ -35,13 +31,13 @@ jobs:
        # run: cp env/cypress.${{github.event.inputs.environment || env.DEFAULT_ENV}}.json cypress.env.json
         #shell: bash
         
-      - name: Copy data from Secrets to cypress.env.json I
+      - name: Conditional to run on STAGE - Copy data from Secrets to cypress.env.json
         if: github.event.inputs.environment == 'STAGE'
         run:
-          echo "RUNNING STAGE"
-          #echo '${{ secrets.CYPRESS_ENV_STAGE }}' > cypress.env.json
+          echo "RUNNING STAGE -" secrets.CYPRESS_ENV_${{github.event.inputs.environment}}
+          echo '${{ secrets.CYPRESS_ENV_STAGE }}' > cypress.env.json
           
-      - name: Copy data from Secrets to cypress.env.json II 
+      - name: Conditional to run on PROD - Copy data from Secrets to cypress.env.json II 
         if: github.event.inputs.environment == 'PROD'
         run: 
           echo "RUNNING PROD"

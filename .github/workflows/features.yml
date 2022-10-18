@@ -14,7 +14,7 @@ on:
         description: 'Add the spec that you want to run:'
         required: true    
 env:
-  DEFAULT_ENV: "stg"
+  DEFAULT_ENV: "STAGE"
   DEFAULT_BROWSER: "chrome"
 
 jobs:
@@ -35,10 +35,16 @@ jobs:
        # run: cp env/cypress.${{github.event.inputs.environment || env.DEFAULT_ENV}}.json cypress.env.json
         #shell: bash
         
-      - name: Copy data from Secrets to cypress.env.json
-        run: echo 'Here ${{ secrets.CYPRESS_ENV_github.event.inputs.environment }}'
-          echo 'Here is the secrets ${{ CYPRESS_ENV_github.event.inputs.environment }}'
-          echo '${{ secrets.CYPRESS_ENV_github.event.inputs.environment }}' > cypress.env.json
+      - name: Copy data from Secrets to cypress.env.json I
+        if: github.event.inputs.environment == "STAGE"
+        run:
+          echo "RUNNING STAGE"
+          #echo '${{ secrets.CYPRESS_ENV_STAGE }}' > cypress.env.json
+          
+      - name: Copy data from Secrets to cypress.env.json II 
+        if: github.event.inputs.environment == "PROD"
+        run: 
+          echo "RUNNING PROD"
       #
       - name: Cypress run 
         uses: cypress-io/github-action@v4

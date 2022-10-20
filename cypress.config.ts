@@ -30,9 +30,8 @@ export default defineConfig({
       //require('cypress-mochawesome-reporter/plugin')(on);
       AllureWriter(on, config);
 
-      const environment: string = config.env.configFile || "stage";
+      const environment: string = config.env.configFile;
       const configurationForEnvironment = fetchConfigurationByFile(environment);
-      console.log(configurationForEnvironment);
       return configurationForEnvironment;
     },
     specPattern: 'cypress/e2e/**/*spec.{js,ts}',
@@ -43,8 +42,18 @@ export default defineConfig({
   trashAssetsBeforeRuns: true
 })
 
-function fetchConfigurationByFile(file: string)  {
-  const pathToConfigFile = path.resolve("env", `cypress.${file}.json`);
+function fetchConfigurationByFile(environment: string)  {
+  let  pathToConfigFile;
+  if(environment == "stage"){
+    pathToConfigFile = path.resolve("env/cypress.stage.json");
+  }
+  if(environment == "dev"){
+    pathToConfigFile = path.resolve("env/cypress.dev.json");
+  }
+  if(environment == "github"){
+    pathToConfigFile = path.resolve("cypress.env.json");
+  }
+  console.log("Environment: ",environment);
   return fs.readJson(pathToConfigFile);
 }
 

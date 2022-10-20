@@ -1,0 +1,5 @@
+Num projeto real, temos que adicionar a esta env e os que temos dentro dela no arquivo do gitIgnore, para não subir estes arquivos para o gitHub, 
+pois eles possuem dados sensiveis, Este dados sensiveis iram ficar armazenados dentro do Secrets do Github e no GitHub Actions iremos fazer a copia para dentro do Cypress.env.json
+Localmente iremos usar o cypress.stage.json, pois como este arquivo esta apenas local, não temos problema.
+Para esta projeto eu vou enviar junto os dois arquivos para o GitHub, para termos como exemplo para o futuro.
+##### Não comitar os arquivos dentro da folder Env numa projeto real ####

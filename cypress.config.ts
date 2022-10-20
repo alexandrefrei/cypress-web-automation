@@ -50,7 +50,7 @@ function fetchConfigurationByFile(environment: string)  {
   if(environment == "dev"){
     pathToConfigFile = path.resolve("env/cypress.dev.json");
   }
-  if(environment == "github"){
+  if(environment == "GitHub"){
     pathToConfigFile = path.resolve("cypress.env.json");
   }
   console.log("Environment: ",environment);

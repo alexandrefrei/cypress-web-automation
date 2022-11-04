@@ -1,12 +1,7 @@
 export class DB {
-  static getUser() {
+  static getUser(): Cypress.Chainable<Promise> {
     cy.log(`getUser`);
     const stringQuery = `SELECT * FROM User;`;
-    cy.task('queryDatabase', stringQuery).then((result) => {
-      cy.log('Row Validation');
-      expect(result[0].Name).to.equal('John');
-    });
-
-    //cy.task("queryDb", stringQuery );
+    return cy.task('queryDb', stringQuery);
   }
 }

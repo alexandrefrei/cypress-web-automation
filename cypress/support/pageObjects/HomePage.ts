@@ -13,6 +13,18 @@ class HomePage {
     cy.get(HOME_LABEL_PRODUCTS).should('have.text', 'Products');
   }
 
+  //This is another way to expose the elements to be used in the spec file, here we just expose the element and the action will be done in the spec file. A little different as shown below where we declare all the actions within the function itself.
+  //Also we declare the function in two different ways. First one is using the arrow function and the other is function declaration.
+  getCartButton = () => cy.get(BUTTON_CART);
+
+  getCartButtonII(): Cypress.Chainable {
+    return cy.get(BUTTON_CART);
+  }
+
+  getNumberOfProduct = () => cy.get(NUMBER_OF_PRODUCTS);
+
+  //*********************************************************************************************************************************************************** */
+
   numberOfProductAtCart(value: string): void {
     cy.get(NUMBER_OF_PRODUCTS).should('have.text', value);
   }
@@ -32,7 +44,7 @@ class HomePage {
           .parent('div')
           .parent('div')
           .within(() => {
-            cy.get(ADD_CART_BUTTON).click().debug;
+            cy.get(ADD_CART_BUTTON).click();
             //cy.get(ADD_CART_BUTTON).should("have.text","Remove");
             //cy.log(item.text().toString()).debug();
             //var value = item.text().toString();

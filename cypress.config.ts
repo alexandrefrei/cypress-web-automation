@@ -38,7 +38,7 @@ export default defineConfig({
     //excludeSpecPattern: ['*.page.js', 'utils.js', '*.d.ts'],
     video: false,
   },
- //Whether Cypress will trash assets within the downloadsFolder, screenshotsFolder, and videosFolder before tests run with cypress run.
+ //Whether Cypress will trash assets within the downloadsFolder, screenshotsFolder, and videosFolder before tests run with cypress run
   trashAssetsBeforeRuns: true
 })
 

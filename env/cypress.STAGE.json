@@ -1,5 +1,5 @@
-{ 
-  "baseUrl": "https://automationpractice.com",
+{
+  "baseUrl": "https://www.saucedemo.com",
   "env": {
     "environment": "staging",
     "user": "standard_user",

@@ -26,7 +26,7 @@
 
 Cypress.Commands.add('login', (email: string, password: string) => {
   cy.log(`Login with: ${email}`);
-  cy.get('#user-name').type(email);
-  cy.get('#password').type(password);
-  cy.get('#login-button').click();
+  cy.get('[data-test="username"]').type(email);
+  cy.get('[data-test="password"]').type(password, { log: false });
+  cy.get('[data-test="login-button"]').click();
 });

@@ -2,7 +2,7 @@ import {
   generateFirstName,
   generateLastName,
   generatePostalCode,
-} from '../utils/TextGenerator';
+} from '../utils/textGenerator';
 
 const CART_TITLE = "span[class='title']";
 const CONTINUE_BUTTON = '#continue';

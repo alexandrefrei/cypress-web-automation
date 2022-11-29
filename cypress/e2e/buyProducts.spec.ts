@@ -1,9 +1,9 @@
 import { USER, PASSWORD } from '../support/utils/config';
-import { cartPage } from 'cypress/support/pageObjects/CartPage';
-import { checkoutCompletePage } from 'cypress/support/pageObjects/CheckoutCompletePage';
+import { cartPage } from 'cypress/support/pageObjects/cartPage';
+import { checkoutCompletePage } from 'cypress/support/pageObjects/checkoutCompletePage';
 import { checkoutOverviewPage } from 'cypress/support/pageObjects/CheckoutOverviewPage';
-import { checkoutPage } from 'cypress/support/pageObjects/CheckoutPage';
-import { homePage } from 'cypress/support/pageObjects/HomePage';
+import { checkoutPage } from 'cypress/support/pageObjects/checkoutPage';
+import { homePage } from 'cypress/support/pageObjects/homePage';
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { userData } from 'cypress/support/dataObjects/userData';
 

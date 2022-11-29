@@ -8,6 +8,6 @@ results
 .idea
 allure-results
 allure-report
-
+.eslintcache
 # Node Dependency directories
 node_modules/

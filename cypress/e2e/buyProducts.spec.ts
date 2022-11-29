@@ -20,6 +20,7 @@ describe('Purchase Products', () => {
     //homePage.selectProductsByName(listProducts);
     productArray = homePage.selectAllTShirt();
     //homePage.numberOfProductAtCart(productArray.length.toString());
+
     homePage.clickAtCart();
 
     //Here is the way to get data from Database

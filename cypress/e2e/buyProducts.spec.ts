@@ -14,7 +14,7 @@ describe('Purchase Products', () => {
     cy.login(USER, PASSWORD);
   });
 
-  it('Purchase All T-Shirts', () => {
+  it('Purchase All T-Shirts', { tags: '@smoke' }, () => {
     homePage.verifyPageOpened();
     //const listProducts = ["Sauce Labs Bolt T-Shirt", "Test.allTheThings() T-Shirt (Red)"];
     //homePage.selectProductsByName(listProducts);

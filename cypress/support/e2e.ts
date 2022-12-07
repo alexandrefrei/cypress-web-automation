@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 // ***********************************************************
 // This example support/e2e.js is processed and
@@ -17,6 +18,7 @@
 // Import commands.js using ES2015 syntax:
 import './commands/commands';
 import '@shelex/cypress-allure-plugin';
+require('@cypress/grep')();
 //import 'cypress-mochawesome-reporter/register';
 
 // Alternatively you can use CommonJS syntax:

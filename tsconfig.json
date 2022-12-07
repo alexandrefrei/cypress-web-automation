@@ -6,11 +6,12 @@
     "baseUrl": ".",
     "lib": ["es5", "dom"],
     "noEmit": true,
-    "types": ["cypress", "node", "@shelex/cypress-allure-plugin"]
+    "types": [
+      "cypress",
+      "node",
+      "@shelex/cypress-allure-plugin",
+      "@cypress/grep"
+    ]
   },
-  "include": [
-    "node_modules/cypress",
-    "cypress/**/*.ts",
-    "cypress",
-  ]
+  "include": ["node_modules/cypress", "cypress/**/*.ts", "cypress"]
 }

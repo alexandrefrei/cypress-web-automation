@@ -13,4 +13,4 @@ class CartPage {
   }
 }
 
-export const cartPage = new CartPage();
+export default new CartPage();

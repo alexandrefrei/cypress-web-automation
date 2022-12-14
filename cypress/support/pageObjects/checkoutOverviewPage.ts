@@ -20,4 +20,4 @@ class CheckoutOverviewPage {
   }
 }
 
-export const checkoutOverviewPage = new CheckoutOverviewPage();
+export default new CheckoutOverviewPage();

@@ -1,11 +1,18 @@
 import { USER, PASSWORD } from '../support/utils/config';
-import { cartPage } from 'cypress/support/pageObjects/cartPage';
+import CartPage from 'cypress/support/pageObjects/cartPage';
 import { checkoutCompletePage } from 'cypress/support/pageObjects/checkoutCompletePage';
-import { checkoutOverviewPage } from 'cypress/support/pageObjects/CheckoutOverviewPage';
+import CheckoutOverviewPage from 'cypress/support/pageObjects/CheckoutOverviewPage';
 import { checkoutPage } from 'cypress/support/pageObjects/checkoutPage';
 import { homePage } from 'cypress/support/pageObjects/homePage';
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { userData } from 'cypress/support/dataObjects/userData';
+
+/*In this project we are using two different ways to export the PageObject classes
+ * The first one we use the named export:     export const homePage = new HomePage();
+ * The second one we use the default export:  export default new CartPage(); 
+ * There is no right way to use the export, just different ways to do the same thing
+
+*/
 
 describe('Purchase Products', () => {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -30,15 +37,15 @@ describe('Purchase Products', () => {
     //homePage.getCartButton().click();
     //homePage.getNumberOfProduct().should('have.text', 4);
 
-    cartPage.verifyPageOpened();
-    cartPage.clickCheckout();
+    CartPage.verifyPageOpened();
+    CartPage.clickCheckout();
 
     checkoutPage.verifyPageOpened();
     checkoutPage.fillInformation();
     checkoutPage.clickContinue();
 
-    checkoutOverviewPage.verifyPageOpened();
-    checkoutOverviewPage.clickFinish();
+    CheckoutOverviewPage.verifyPageOpened();
+    CheckoutOverviewPage.clickFinish();
 
     checkoutCompletePage.verifyPageOpened();
     checkoutCompletePage.verifyFinalMessage();

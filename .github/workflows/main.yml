@@ -44,7 +44,7 @@ jobs:
           spec: 'cypress\e2e\buyProducts.spec.ts'
       #
       - name: Get Allure history
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
         if: always()
         continue-on-error: true
         with:

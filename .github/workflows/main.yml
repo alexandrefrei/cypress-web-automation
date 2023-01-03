@@ -41,6 +41,7 @@ jobs:
         uses: cypress-io/github-action@v4
         with:
           command: npx cypress run --browser ${{github.event.inputs.browser || env.DEFAULT_BROWSER}} --env configFile=${{github.event.inputs.environment || env.DEFAULT_ENV}} allure=true
+          spec: 'cypress\e2e\buyProducts.spec.ts'
       #
       - name: Get Allure history
         uses: actions/checkout@v2

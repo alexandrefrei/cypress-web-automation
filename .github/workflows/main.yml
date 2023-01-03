@@ -4,9 +4,9 @@ on:
   workflow_dispatch:
     inputs:
       environment:
-        description: 'Select the environment to run the tests: dev / stg / prod'
+        description: 'Select the environment to run the tests: dev / stage / prod'
         required: true
-        default: 'stg'
+        default: 'stage'
       browser:
         description: 'Select the  browser to run the tests: chrome / electron'
         required: true

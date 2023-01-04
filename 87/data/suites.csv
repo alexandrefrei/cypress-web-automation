@@ -1,2 +1,0 @@
-"Status","Start Time","Stop Time","Duration in ms","Parent Suite","Suite","Sub Suite","Test Class","Test Method","Name","Description"
-"broken","Tue Jan 03 20:50:24 GMT 2023","Tue Jan 03 20:50:24 GMT 2023","0","","cypress/e2e/buyProducts.spec.ts","","","","Oops...we found an error preparing this test file: cypress/e2e/buyProducts.spec.ts",""

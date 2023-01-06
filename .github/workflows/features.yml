@@ -40,9 +40,7 @@ jobs:
       - name: Cypress run 
         uses: cypress-io/github-action@v4
         with:
-          command: npx cypress run --browser ${{github.event.inputs.browser}} --env configFile=${{github.event.inputs.environment}}
-          spec: cypress/e2e/buyProducts.spec.ts
-          #spec: ${{github.event.inputs.specs}}
+          command: npx cypress run --browser ${{github.event.inputs.browser}} --env configFile=${{github.event.inputs.environment}} --spec cypress/e2e/buyProducts.spec.ts
       #
       - name: Get Allure history
         uses: actions/checkout@v2

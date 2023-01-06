@@ -1,7 +1,7 @@
 import { USER, PASSWORD } from '../support/utils/config';
 import CartPage from '../support/pageObjects/cartPage';
 import { checkoutCompletePage } from '../support/pageObjects/checkoutCompletePage';
-import CheckoutOverviewPage from '../support/pageObjects/CheckoutOverviewPage';
+import CheckoutOverviewPage from '../support/pageObjects/checkoutOverviewPage';
 import { checkoutPage } from '../support/pageObjects/checkoutPage';
 import { homePage } from '../support/pageObjects/homePage';
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -9,9 +9,9 @@ import { userData } from '../support/dataObjects/userData';
 
 /*In this project we are using two different ways to export the PageObject classes
  * The first one we use the named export:     export const homePage = new HomePage();
- * The second one we use the default export:  export default new CartPage(); 
+ * The second one we use the default export:  export default new CartPage();
  * There is no right way to use the export, just different ways to do the same thing
-*/
+ */
 
 describe('Purchase Products', () => {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars

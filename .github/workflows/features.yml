@@ -38,9 +38,9 @@ jobs:
           echo "RUNNING PROD"
           
       - name: Cypress run 
-        uses: cypress-io/github-action@v4
+        uses: cypress-io/github-action@v5
         with:
-          command: npx cypress run --browser ${{github.event.inputs.browser}} --env configFile=${{github.event.inputs.environment}} --spec cypress/e2e/buyProducts.spec.ts
+          command: npx cypress run --browser ${{github.event.inputs.browser}} --env configFile=${{github.event.inputs.environment}} --spec ${{github.event.inputs.specs}}
       #
       - name: Get Allure history
         uses: actions/checkout@v2

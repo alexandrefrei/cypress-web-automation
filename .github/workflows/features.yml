@@ -42,6 +42,11 @@ jobs:
         with:
           command: npx cypress run --browser ${{github.event.inputs.browser}} --env configFile=${{github.event.inputs.environment}} --spec ${{github.event.inputs.specs}}
       #
+      - name: Sending the job Status
+        if:  ${{ job.status }} == 'success'
+        run: echo 'job passou'
+      
+      
       - name: Get Allure history
         uses: actions/checkout@v3
         if: always()

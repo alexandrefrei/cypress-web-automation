@@ -52,24 +52,11 @@ jobs:
          | ${{ job.status == 'failure' }}
         run: echo 'job falhou'
         
-      - name: Send GitHub Action trigger data to Slack
+      - name: Post to a Slack channel
         id: slack
         uses: slackapi/slack-github-action@v1.22.0
         with:
-          channel-id: '#1_bug_reporting'
-          payload: |
-            {
-              "text": "Cypress Tests date: ${{ steps.date.outputs.date }}\nCypress Tests finished with ${{fromJson(steps.set_var.outputs.packageJson).stats.failures}} Failed\nSee results at: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}",
-              "blocks": [
-                {
-                  "type": "section",
-                  "text": {
-                    "type": "mrkdwn",
-                    "text": "Cypress Tests date: ${{ steps.date.outputs.date }}\nCypress Tests finished with ${{fromJson(steps.set_var.outputs.packageJson).stats.failures}} Failed\nSee results at: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}"
-                  }
-                }
-              ]
-            }
+          channel-id: 'C04J1G54BPU'
         env:
           SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }} 
       

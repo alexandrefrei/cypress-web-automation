@@ -51,16 +51,15 @@ jobs:
         if: always()
          | ${{ job.status == 'failure' }}
         run: echo 'job falhou'
-      
-      - name: Slack Notification
+        
+      - name: Post to a Slack channel
         id: slack
         uses: slackapi/slack-github-action@v1.23.0
-        if: always()
         with:
-         channel-id: 'Cypress_notification'
+          channel-id: 'C04J1G54BPU'
+          slack-message: "GitHub build result: ${{ job.status }}\n${{ github.event.pull_request.html_url || github.event.head_commit.url }}"
         env:
-          SLACK_BOT_TOKEN: ${{ secrets.SLACK_WEBHOOK }}
-      
+          SLACK_BOT_TOKEN:  ${{ secrets.SLACK_BOT_TOKEN }}
       
       - name: Get Allure history
         uses: actions/checkout@v3

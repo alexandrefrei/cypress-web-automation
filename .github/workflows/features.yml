@@ -67,9 +67,41 @@ jobs:
         uses: slackapi/slack-github-action@v1.23.0
         with:
           channel-id: 'C04J1G54BPU'
-          slack-message: "GitHub build result: ${{ job.status }}\n${{ github.event.pull_request.html_url || github.event.head_commit.url }}"
+          payload: |
+           {
+            "blocks": [
+              { "type": "divider" },
+              {
+                "type": "image",
+                "title": {
+                  "type": "plain_text",
+                  "text": "Testing Slack",
+                  "emoji": true
+                },
+                "image_url": "https://yt3.ggpht.com/iD0oePTGV8tZwEEP_WEG2rvyNiQAVfmjhawFMCj17ARjjmw-J70k9NDjSE5QTzD9Vk3ayBU=s900-c-k-c0x00ffffff-no-rj",
+                "alt_text": "marg"
+              },
+              {
+                "type": "actions",
+                "elements": [
+                  {
+                    "type": "button",
+                    "text": {
+                      "type": "plain_text",
+                      "text": $values.button_text
+                    },
+                    "url": $values.button_url
+                  }
+                ]
+              }
+            ],
+            "channel-id": "NEW_TARGET_CHANNEL_ID"
+           } 
         env:
-          SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }} 
+          SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
+        values: |
+          button_text: ${{ github.sha }}
+          button_url: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
       
       - name: Get Allure history
         uses: actions/checkout@v3

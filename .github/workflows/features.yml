@@ -37,21 +37,16 @@ jobs:
         run: 
           echo "RUNNING PROD"
           
+      - name: Git ID
+        if: always()
+        run: echo 'https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}' 
+        
       - name: Cypress run 
         uses: cypress-io/github-action@v5
         with:
           command: npx cypress run --browser ${{github.event.inputs.browser}} --env configFile=${{github.event.inputs.environment}} --spec ${{github.event.inputs.specs}}
       #
-      - name: Sending the job Status success
-        if: always()
-         | ${{ job.status == 'success' }}
-        run: echo 'job passou'
-        
-      - name: Sending the job Status failed
-        if: always()
-         | ${{ job.status == 'failure' }}
-        run: echo 'job falhou'
-        
+  
       # Slack channel id, channel name, or user id to post message.
       # See also: https://api.slack.com/methods/chat.postMessage#channels
       # You can pass in multiple channels to post to by providing a comma-delimited list of channel IDs.

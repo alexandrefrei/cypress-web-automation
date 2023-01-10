@@ -42,7 +42,7 @@ jobs:
         run: | 
           echo 'JOB LINK: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}'
           'JOB NAME: ${{ github.name }}
-          'NAME: ${{ name }}
+          'NAME: ${{ github }}
           'JOB STATUS: ${{ job.status }}
           'JOB ENV: ${{github.event.inputs.environment}}
           'RUNNER NAME': ${{ runner.name }}

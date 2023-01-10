@@ -12,7 +12,7 @@ on:
         default: 'chrome'
       specs:
         description: 'Add the spec that you want to run:'
-        required: true    
+        required: true  
 jobs:
   feature-job:
     name: Running tests on feature mode
@@ -40,10 +40,12 @@ jobs:
       - name: Git ID
         if: always()
         run: | 
-          echo 'JOB URL: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}'
-          'JOB SHA: ${{ github.sha }}'
-          'JOB NAME: ${{ github.action }}
+          echo 'JOB LINK: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}'
+          'JOB NAME: ${{ github.name }}
+          'NAME: ${{ name }}
           'JOB STATUS: ${{ job.status }}
+          'JOB ENV: ${{github.event.inputs.environment}}
+          'RUNNER NAME': ${{ runner.name }}
           
           
         

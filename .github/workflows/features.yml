@@ -39,12 +39,19 @@ jobs:
           
       - name: Git ID
         if: always()
-        run: echo 'https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}' 
+        run: | 
+          echo 'JOB URL: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}'
+          'JOB SHA: ${{ github.sha }}'
+          'JOB NAME: ${{ github.action }}
+          'JOB STATUS: ${{ job.status }}
+          
+          
         
-      - name: Cypress run 
-        uses: cypress-io/github-action@v5
-        with:
-          command: npx cypress run --browser ${{github.event.inputs.browser}} --env configFile=${{github.event.inputs.environment}} --spec ${{github.event.inputs.specs}}
+        
+      #- name: Cypress run 
+        #uses: cypress-io/github-action@v5
+        #with:
+         # command: npx cypress run --browser ${{github.event.inputs.browser}} --env configFile=${{github.event.inputs.environment}} --spec ${{github.event.inputs.specs}}
       #
   
       # Slack channel id, channel name, or user id to post message.

@@ -37,17 +37,17 @@ jobs:
         run: 
           echo "RUNNING PROD"
           
-      - name: Git ID
-        if: always()
-        run: | 
-          echo 'JOB LINK: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}'
-          'JOB NAME: ${{ github.run_name }}
-          'NAME: ${{ inputs.run_name }}
-          'JOB: ${{ github.action.name }}
-          'BRANCH NAME: ${{ github.ref_name }}
-          'JOB STATUS: ${{ job.status }}
-          'JOB ENV: ${{github.event.inputs.environment}}
-          'RUNNER NAME': ${{ runner.name }}
+      ##- name: Git ID
+        ##if: always()
+        ##run: | 
+          #echo 'JOB LINK: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}'
+          #'JOB NAME: ${{ github.run_name }}
+          #'NAME: ${{ inputs.run_name }}
+          #'JOB: ${{ github.action.name }}
+          #'BRANCH NAME: ${{ github.ref_name }}
+          #'JOB STATUS: ${{ job.status }}
+          #'JOB ENV: ${{github.event.inputs.environment}}
+          #'RUNNER NAME': ${{ runner.name }}
           
           
         

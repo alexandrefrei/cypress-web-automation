@@ -90,7 +90,7 @@ jobs:
                       "type": "plain_text",
                       "text": FEATURE_MODE
                     },
-                    "url": https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
+                    "url": "https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}"
                   }
                 ]
               }

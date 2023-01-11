@@ -70,8 +70,10 @@ jobs:
           payload: |
            {
             "blocks": [
-              { "type": "divider" },
-              {
+             {
+                "type": "divider"
+             },
+             {
                 "type": "image",
                 "title": {
                   "type": "plain_text",
@@ -88,14 +90,14 @@ jobs:
                     "type": "button",
                     "text": {
                       "type": "plain_text",
-                      "text": FEATURE_MODE
+                      "text": "FEATURE_MODE"
                     },
                     "url": "https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}"
                   }
                 ]
               }
-            ],
-           } 
+            ]
+           }
         env:
           SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
           

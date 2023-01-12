@@ -37,6 +37,30 @@ jobs:
         run: 
           echo "RUNNING PROD"
           
+      - name: Cypress run 🧪
+        uses: cypress-io/github-action@v5
+       
+      - name: Upload screenshot
+        uses: actions/upload-artifact@v3
+        if: always()
+        with:
+          name: cypress-screenshot
+          path: cypress/screenshots
+          
+      - name: Upload video
+        uses: actions/upload-artifact@v3
+        if: always()
+        with:
+          name: cypress-video
+          path: cypress/videos
+          
+      - name: Upload report
+        uses: actions/upload-artifact@v3
+        if: always()
+        with:
+          name: mochawesome report
+          path: cypress/report 
+       
       ##- name: Git ID
         ##if: always()
         ##run: | 
@@ -62,42 +86,43 @@ jobs:
       # See also: https://api.slack.com/methods/chat.postMessage#channels
       # You can pass in multiple channels to post to by providing a comma-delimited list of channel IDs.
       # C04J1G54BPU - Cypress Notification channel
-      - name: Post to a Slack channel
-        id: slack
-        uses: slackapi/slack-github-action@v1.23.0
-        with:
-          channel-id: 'C04J1G54BPU'
-          payload: |
-           {
-            "blocks": [
-             {
-                "type": "divider"
-             },
-             {
-                "type": "image",
-                "title": {
-                  "type": "plain_text",
-                  "text": "Testing Slack",
-                  "emoji": true
-                },
-                "image_url": "https://yt3.ggpht.com/iD0oePTGV8tZwEEP_WEG2rvyNiQAVfmjhawFMCj17ARjjmw-J70k9NDjSE5QTzD9Vk3ayBU=s900-c-k-c0x00ffffff-no-rj",
-                "alt_text": "marg"
-              },
-              {
-                "type": "actions",
-                "elements": [
-                  {
-                    "type": "button",
-                    "text": {
-                      "type": "plain_text",
-                      "text": "FEATURE_MODE"
-                    },
-                    "url": "https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}"
-                  }
-                ]
-              }
-            ]
-           }
-        env:
-          SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
+      
+     # - name: Post to a Slack channel
+     #   id: slack
+     #   uses: slackapi/slack-github-action@v1.23.0
+     #   with:
+     #     channel-id: 'C04J1G54BPU'
+     #     payload: |
+     #      {
+     #       "blocks": [
+     #        {
+     #           "type": "divider"
+     #        },
+     #        {
+     #           "type": "image",
+     #           "title": {
+     #             "type": "plain_text",
+     #             "text": "Testing Slack",
+     #             "emoji": true
+     #           },
+     #           "image_url": "https://yt3.ggpht.com/iD0oePTGV8tZwEEP_WEG2rvyNiQAVfmjhawFMCj17ARjjmw-J70k9NDjSE5QTzD9Vk3ayBU=s900-c-k-c0x00ffffff-no-rj",
+     #           "alt_text": "marg"
+     #         },
+     #         {
+     #           "type": "actions",
+     #           "elements": [
+     #             {
+     #               "type": "button",
+     #               "text": {
+     #                 "type": "plain_text",
+     #                 "text": "FEATURE_MODE"
+     #               },
+     #               "url": "https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+     #             }
+     #           ]
+     #         }
+     #       ]
+     #      }
+     #   env:
+     #     SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
           

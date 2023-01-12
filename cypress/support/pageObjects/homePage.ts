@@ -29,7 +29,7 @@ class HomePage {
     cy.get(NUMBER_OF_PRODUCTS).should('have.text', value);
   }
   clickAtCart(): void {
-    cy.get(BUTTON_CART).click();
+    cy.get(BUTTON_CART).should('be.visible').click();
   }
 
   selectAllTShirt(): string[] {

@@ -23,9 +23,9 @@ class CheckoutPage {
   }
 
   fillInformation(): void {
-    cy.get(FIRST_NAME).clear().type(generateFirstName());
-    cy.get(LAST_NAME).clear().type(generateLastName());
-    cy.get(POSTAL_CODE).clear().type(generatePostalCode());
+    cy.get(FIRST_NAME).should('be.visible').clear().type(generateFirstName());
+    cy.get(LAST_NAME).should('be.visible').clear().type(generateLastName());
+    cy.get(POSTAL_CODE).should('be.visible').clear().type(generatePostalCode());
   }
 }
 

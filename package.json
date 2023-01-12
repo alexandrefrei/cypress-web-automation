@@ -6,7 +6,7 @@
   "scripts": {
     "cy:open_stg": "cypress open --e2e --browser chrome --env configFile=stage",
     "cy:open_qa": "cypress open --e2e --browser chrome --env configFile=qa",
-    "cy:run": "cypress run --browser chrome --env configFile=stg",
+    "cy:run": "cypress run --browser chrome --env configFile=stage --spec cypress/e2e/buyProducts.spec.ts",
     "cy:runCI": "cypress run --browser chrome --env configFile=GitHub",
     "cy:smoke": "npx cypress run --browser chrome --env configFile=stage,grepTags=@smoke",
     "cy:run_allure": "cypress run --browser chrome --env configFile=stg allure=true",
@@ -19,7 +19,7 @@
     "prettier-write": "prettier --config .prettierrc --write cypress/**/*.{js,ts}",
     "lint-check": "eslint --config .eslintrc.json . --ext .ts",
     "lint-fix": "eslint . --cache --fix",
-    "cy:run_mochawosome": "cypress run --browser chrome --env configFile=stg"
+    "cy:run_mochawosome": "cypress run --browser chrome --env configFile=stage"
   },
   "author": "",
   "license": "ISC",

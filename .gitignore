@@ -4,6 +4,7 @@ cypress/results/*
 cypress/reports/*
 cypress/screenshots/*
 cypress/videos/*
+cypress/report
 results
 .idea
 allure-results

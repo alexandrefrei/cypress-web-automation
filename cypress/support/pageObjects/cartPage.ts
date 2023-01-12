@@ -9,7 +9,7 @@ class CartPage {
   }
 
   clickCheckout(): void {
-    cy.get(CHECKOUT_BUTTON).click();
+    cy.get(CHECKOUT_BUTTON).should("be.visible").click();
   }
 }
 

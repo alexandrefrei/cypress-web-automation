@@ -19,7 +19,8 @@
 import './commands/commands';
 import '@shelex/cypress-allure-plugin';
 require('@cypress/grep')();
-//import 'cypress-mochawesome-reporter/register';
+
+import 'cypress-mochawesome-reporter/register';
 
 // Alternatively you can use CommonJS syntax:
 // require('./commands')

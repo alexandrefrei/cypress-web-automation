@@ -39,6 +39,8 @@ jobs:
           
       - name: Cypress run 🧪
         uses: cypress-io/github-action@v5
+        with:
+          command: npx cypress run --browser ${{github.event.inputs.browser}} --env configFile=${{github.event.inputs.environment}} --spec ${{github.event.inputs.specs}}
        
       - name: Upload screenshot
         uses: actions/upload-artifact@v3
@@ -60,7 +62,10 @@ jobs:
         with:
           name: mochawesome report
           path: cypress/report 
-       
+     
+      - name: Cypress Report Summary
+        run: echo '### Cypress Report Summary! ' >> $GITHUB_STEP_SUMMARY
+     
       ##- name: Git ID
         ##if: always()
         ##run: | 

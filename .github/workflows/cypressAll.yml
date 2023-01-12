@@ -1,1 +1,89 @@
+name: E2E Cypress tests
+
+on:
+   workflow_dispatch:
+     inputs: 
+       specs:
+         description: 'Add the spec file path that you want to run:'
+         required: true
+env:
+  DEFAULT_ENV: "stage"
+
+jobs:
+  ui-chrome-tests:
+    name: Run all e2e tests in chrome
+    runs-on: ubuntu-latest
+    #container: cypress/browsers:node14.16.0-chrome90-ff88
+    steps:
+      #
+      - name: Checkout
+        uses: actions/checkout@v3
+      # 
+      - name: Copying data to cypress.env.json
+        run: cp env/cypress.${{env.DEFAULT_ENV}}.json cypress.env.json
+        shell: bash
+      #
+      - name: Cypress run 
+        uses: cypress-io/github-action@v5
+        with:
+          command: npx cypress run --browser chrome --env configFile=${{env.DEFAULT_ENV}} --spec cypress/e2e/buyProducts.spec.ts
+      #
+      - name: Upload screenshot
+        uses: actions/upload-artifact@v3
+        if: always()
+        with:
+          name: cypress-screenshot
+          path: cypress/screenshots
+          
+      - name: Upload video
+        uses: actions/upload-artifact@v3
+        if: always()
+        with:
+          name: cypress-video
+          path: cypress/videos
+          
+      - name: Upload report
+        uses: actions/upload-artifact@v3
+        if: always()
+        with:
+          name: mochawesome report
+          path: cypress/report
+  ui-firefox-tests:
+    name: Run all e2e tests in firefox
+    runs-on: ubuntu-latest
+    #container: cypress/browsers:node14.16.0-chrome90-ff88
+    steps:
+      #
+      - name: Checkout
+        uses: actions/checkout@v3
+      # 
+      - name: Copying data to cypress.env.json
+        run: cp env/cypress.${{env.DEFAULT_ENV}}.json cypress.env.json
+        shell: bash
+      #
+      - name: Cypress run 
+        uses: cypress-io/github-action@v5
+        with:
+          command: npx cypress run --browser firefox --env configFile=${{env.DEFAULT_ENV}} --spec cypress/e2e/buyProducts.spec.ts
+      #
+      - name: Upload screenshot
+        uses: actions/upload-artifact@v3
+        if: always()
+        with:
+          name: cypress-screenshot
+          path: cypress/screenshots
+          
+      - name: Upload video
+        uses: actions/upload-artifact@v3
+        if: always()
+        with:
+          name: cypress-video
+          path: cypress/videos
+          
+      - name: Upload report
+        uses: actions/upload-artifact@v3
+        if: always()
+        with:
+          name: mochawesome report
+          path: cypress/report
 

@@ -1,4 +1,4 @@
-name: E2E Cypress tests
+name: Run All Cypress
 
 on:
    workflow_dispatch:

@@ -1,4 +1,4 @@
-name: Running two browser at same time
+name: Running two browsers in Parallel
 
 on:
    workflow_dispatch:

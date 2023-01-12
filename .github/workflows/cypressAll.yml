@@ -1,4 +1,4 @@
-name: Run All Cypress
+name: Running two browser at same time
 
 on:
    workflow_dispatch:

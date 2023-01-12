@@ -64,7 +64,7 @@ jobs:
           path: cypress/report 
      
       - name: Cypress Report Summary
-        run: echo '### Cypress Report Summary! ' >> $GITHUB_STEP_SUMMARY
+        run: echo "### Cypress Report Summary! :rocket:" >> $GITHUB_STEP_SUMMARY
      
       ##- name: Git ID
         ##if: always()

@@ -22,7 +22,7 @@ describe('Purchase Products', () => {
   });*/
 
   it('Purchase All T-Shirts', { tags: '@smoke' }, () => {
-    cy.get("[data-cy='header-login']").should('be.visible');
+    cy.get("[data-cy='header-login']").should('not.be.visible');
 
     /*
     homePage.verifyPageOpened();

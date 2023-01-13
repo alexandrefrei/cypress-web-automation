@@ -43,11 +43,9 @@ jobs:
         with:
           command: npx cypress run --browser ${{github.event.inputs.browser}} --env configFile=${{github.event.inputs.environment}} --spec ${{github.event.inputs.specs}}
           
-      - name: Gettting date
-        run: 
-          echo "Gettting date"
-          echo ${{ steps.date.outputs.date }}
-       
+      - name: Generate JUNIT REPORT
+        run: npx jrm ./cypress/reports/junitreport.xml ./cypress/reports/junit/*.xml
+        
       - name: Upload screenshot
         uses: actions/upload-artifact@v3
         if: always()

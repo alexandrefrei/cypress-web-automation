@@ -33,7 +33,7 @@ export default defineConfig({
         console.log('override after:run');
         //if you are using other than Windows remove below line (having await exec)
         //await exec(
-        //  'npx jrm ./cypress/reports/junitreport.xml ./cypress/reports/junit/*.xml',
+        'npx jrm ./cypress/reports/junitreport.xml ./cypress/reports/junit/*.xml'
         //);
         await afterRunHook();
       });

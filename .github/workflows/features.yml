@@ -11,8 +11,9 @@ on:
         required: true
         default: 'chrome'
       specs:
-        description: 'Add the spec that you want to run:'
-        required: true  
+        description: 'Add the spec file path that you want to run:'
+        default: 'cypress/e2e/*.spec.ts'
+        required: true
 jobs:
   feature-job:
     name: Running tests on feature mode

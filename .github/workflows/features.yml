@@ -43,8 +43,8 @@ jobs:
         with:
           command: npx cypress run --browser ${{github.event.inputs.browser}} --env configFile=${{github.event.inputs.environment}} --spec ${{github.event.inputs.specs}}
           
-      - name: Generate JUNIT REPORT
-        run: npx jrm ./cypress/reports/junitreport.xml ./cypress/reports/junit/*.xml
+      #- name: Generate JUNIT REPORT
+       # run: npx jrm ./cypress/reports/junitreport.xml ./cypress/reports/junit/*.xml
         
       - name: Upload screenshot
         uses: actions/upload-artifact@v3
@@ -53,14 +53,14 @@ jobs:
           name: cypress-screenshot
           path: cypress/screenshots
      
-      - name: Upload test report
+      - name: Upload HTML test report
         uses: actions/upload-artifact@v3
         if: always()
         with:
-          name: mochawesome report
-          path: cypress/reports
+          name: 'Cypress-Test-Report-${{ steps.date.outputs.date }}'
+          path: cypress/reports/index.html
           
-      - name: Create test summary
+      - name: Create test summary 
         uses: test-summary/action@v1
         with:
           paths: cypress/reports/junit/**/*.xml

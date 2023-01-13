@@ -20,8 +20,8 @@ jobs:
     # Setting the OS to run the cypress tests
     runs-on: ubuntu-latest
     # Setting the Docker container
-    container: 
-      image: cypress/included:12.3.0
+    #container: 
+     # image: cypress/included:12.3.0
     #
     steps:
       #

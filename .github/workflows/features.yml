@@ -42,6 +42,11 @@ jobs:
         uses: cypress-io/github-action@v5
         with:
           command: npx cypress run --browser ${{github.event.inputs.browser}} --env configFile=${{github.event.inputs.environment}} --spec ${{github.event.inputs.specs}}
+          
+      - name: Gettting date
+        run: 
+          echo "Gettting date"
+          echo ${{ steps.date.outputs.date }}
        
       - name: Upload screenshot
         uses: actions/upload-artifact@v3
@@ -55,7 +60,7 @@ jobs:
         if: always()
         with:
           name: mochawesome report
-          path: cypress/report
+          path: cypress/reports
           
       - name: Create test summary
         uses: test-summary/action@v1

@@ -49,23 +49,22 @@ jobs:
         with:
           name: cypress-screenshot
           path: cypress/screenshots
-          
-      - name: Upload video
-        uses: actions/upload-artifact@v3
-        if: always()
-        with:
-          name: cypress-video
-          path: cypress/videos
-          
-      - name: Upload report
+     
+      - name: Upload test report
         uses: actions/upload-artifact@v3
         if: always()
         with:
           name: mochawesome report
-          path: cypress/report 
+          path: cypress/report
+          
+      - name: Create test summary
+        uses: test-summary/action@v1
+        with:
+          paths: cypress/reports/junit/**/*.xml
+        if: always()
      
-      - name: Cypress Report Summary
-        run: echo "### Cypress Report Summary! :rocket:" >> $GITHUB_STEP_SUMMARY
+      #- name: Cypress Report Summary
+       # run: echo "### Cypress Report Summary! :rocket:" >> $GITHUB_STEP_SUMMARY
      
       ##- name: Git ID
         ##if: always()

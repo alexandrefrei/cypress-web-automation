@@ -11,7 +11,7 @@ const POSTAL_CODE = '#postal-code';
 class CheckoutOverviewPage {
   verifyPageOpened(): void {
     cy.log(`verifyPageOpened  - CheckoutOverview`);
-    cy.url().should('include', 'checkout-step-twow');
+    cy.url().should('include', 'checkout-step-two');
     cy.get(CART_TITLE).should('have.text', 'Checkout: Overview');
   }
 

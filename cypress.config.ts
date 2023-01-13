@@ -4,7 +4,10 @@ import { readFileSync } from 'fs';
 const fs = require('fs-extra');
 const path = require('path');
 const mysql = require('mysql');
-const { beforeRunHook, afterRunHook } = require('cypress-mochawesome-reporter/lib');
+const {
+  beforeRunHook,
+  afterRunHook,
+} = require('cypress-mochawesome-reporter/lib');
 const exec = require('child_process').execSync;
 
 export default defineConfig({
@@ -23,13 +26,15 @@ export default defineConfig({
         console.log('override before:run');
         await beforeRunHook(details);
         //If you are using other than Windows remove below two lines
-        await exec("IF EXIST cypress\\screenshots rmdir /Q /S cypress\\screenshots")
-        await exec("IF EXIST cypress\\reports rmdir /Q /S cypress\\reports")
+        //await exec("IF EXIST cypress\\screenshots rmdir /Q /S cypress\\screenshots")
+        //await exec("IF EXIST cypress\\reports rmdir /Q /S cypress\\reports")
       });
-    on('after:run', async () => {
+      on('after:run', async () => {
         console.log('override after:run');
         //if you are using other than Windows remove below line (having await exec)
-        await exec("npx jrm ./cypress/reports/junitreport.xml ./cypress/reports/junit/*.xml");
+        await exec(
+          'npx jrm ./cypress/reports/junitreport.xml ./cypress/reports/junit/*.xml',
+        );
         await afterRunHook();
       });
 

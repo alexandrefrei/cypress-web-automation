@@ -16,7 +16,7 @@
   "allure": true,
   "reporter": "cypress-multi-reporters",
   "reporterOptions": {
-    "reporterEnabled": "mochawesome, cypress-mochawesome-reporter, mocha-junit-reporter",
+    "reporterEnabled": "cypress-mochawesome-reporter, mocha-junit-reporter",
     "cypressMochawesomeReporterReporterOptions": {
       "reportDir": "cypress/reports",
       "charts": true,

@@ -2,10 +2,7 @@ name: Running two browsers in Parallel
 
 on:
    workflow_dispatch:
-     inputs: 
-       specs:
-         description: 'Add the spec file path that you want to run:'
-         required: true
+   
 env:
   DEFAULT_ENV: "stage"
 

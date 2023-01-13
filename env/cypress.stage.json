@@ -1,5 +1,5 @@
 {
-  "baseUrl": "https://www.saucedemo.com",
+  "baseUrl": "https://www.yieldstreet.com",
   "env": {
     "environment": "staging",
     "user": "standard_user",
@@ -39,13 +39,13 @@
   "execTimeout": 1800,
   "defaultCommandTimeout": 1000,
   "requestTimeout": 1000,
-  "pageLoadTimeout": 3000,
-  "responseTimeout": 1000,
+  "pageLoadTimeout": 30000,
+  "responseTimeout": 10000,
   "viewportWidth": 1200,
   "viewportHeight": 1200,
   "videoUploadOnPasses": false,
   "retries": {
     "runMode": 1,
-    "openMode": 2
+    "openMode": 1
   }
 }

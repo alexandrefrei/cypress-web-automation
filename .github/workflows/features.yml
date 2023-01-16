@@ -75,11 +75,12 @@ jobs:
           content="${content//'%'/'%25'}"
           content="${content//$'\n'/'%0A'}"
           content="${content//$'\r'/'%0D'}"
-          echo "packageJson={content}" >> $GITHUB_OUTPUT
+          echo "::set-output name=packageJson::$content"
+   
        
       - name: Read JSON file
         run: |
-          echo "${{steps.set_var.outputs.packageJson}}"
+          echo "JSON FILE: ${{steps.set_var.outputs.packageJson}}"
           echo "Number of Cypress tests run: ${{fromJson(steps.set_var.outputs.packageJson).stats.tests}}"
           echo "Number of failed Cypress tests: ${{fromJson(steps.set_var.outputs.packageJson).stats.failures}}"
           echo "Number of passed Cypress tests: ${{fromJson(steps.set_var.outputs.packageJson).stats.passes}}"
@@ -87,6 +88,7 @@ jobs:
 
       #echo "${{steps.set_var.outputs.packageJson}}"
       #echo "::set-output name=packageJson::$content"
+     #echo "packageJson={content}" >> $GITHUB_OUTPUT
       ##- name: Git ID
       ##if: always()
       ##run: |

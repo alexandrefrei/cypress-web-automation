@@ -80,12 +80,12 @@ jobs:
        
       - name: Read JSON file
         run: |
-          echo "${{steps.set_var.outputs.packageJson}}"
           echo "Number of Cypress tests run: ${{fromJson(steps.set_var.outputs.packageJson).stats.tests}}"
           echo "Number of failed Cypress tests: ${{fromJson(steps.set_var.outputs.packageJson).stats.failures}}"
           echo "Number of passed Cypress tests: ${{fromJson(steps.set_var.outputs.packageJson).stats.passes}}"
           echo "See results at: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}"
 
+      #echo "${{steps.set_var.outputs.packageJson}}"
       ##- name: Git ID
       ##if: always()
       ##run: |

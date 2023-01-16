@@ -15,7 +15,7 @@ class CheckoutPage {
   verifyPageOpened(): void {
     cy.log(`verifyPageOpened  - CheckoutPage`);
     cy.url().should('include', 'checkout-step-one');
-    cy.get(CART_TITLE).should('have.text', 'Checkout: Your Information');
+    cy.get(CART_TITLE).should('have.text', 'Checkout: Your Information gf');
   }
 
   clickContinue(): void {

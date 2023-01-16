@@ -27,12 +27,12 @@ jobs:
       #
       - name: Checkout
         uses: actions/checkout@v3
-      # 
+      #
       - name: Get current date
         id: date
         run: |
           echo "date=$(date +'%Y-%m-%d-%H-%M')" >> $GITHUB_OUTPUT
-      
+
       # - name: Conditional to run on STAGE - Copy data from Secrets to cypress.${{github.event.inputs.environment}}.json
       #   if: github.event.inputs.environment == 'stage'
       #   run: |
@@ -67,7 +67,7 @@ jobs:
         if: always()
         with:
           paths: cypress/reports/junit/**/*.xml
-          
+
       - name: Get test failure information from Cypress report
         id: set_var
         run: |
@@ -76,14 +76,14 @@ jobs:
           content="${content//$'\n'/'%0A'}"
           content="${content//$'\r'/'%0D'}"
           echo "packageJson=${content}" >> $GITHUB_OUTPUT
-                     
+
       - name: Read JSON file
-        run: |                                       
+        run: |
           echo "Number of Cypress tests run: ${{fromJson(steps.set_var.outputs.packageJson).stats.tests}}"
           echo "Number of failed Cypress tests: ${{fromJson(steps.set_var.outputs.packageJson).stats.failures}}"
           echo "Number of passed Cypress tests: ${{fromJson(steps.set_var.outputs.packageJson).stats.passes}}"
           echo "See results at: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}"
-          
+
       ##- name: Git ID
       ##if: always()
       ##run: |

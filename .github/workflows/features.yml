@@ -84,6 +84,7 @@ jobs:
           echo "Number of failed Cypress tests: ${{fromJson(steps.set_var.outputs.packageJson).stats.failures}}"
           echo "Number of passed Cypress tests: ${{fromJson(steps.set_var.outputs.packageJson).stats.passes}}"
           echo "See results at: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+          echo "GitHub Action build result: ${{ job.status }}"
 
       #echo "${{steps.set_var.outputs.packageJson}}"
       #echo "::set-output name=packageJson::$content"

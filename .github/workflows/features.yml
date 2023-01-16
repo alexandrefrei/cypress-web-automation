@@ -27,7 +27,12 @@ jobs:
       #
       - name: Checkout
         uses: actions/checkout@v3
-      #
+      # 
+      - name: Get current date
+        id: date
+        run: |
+          echo "date=$(date +'%Y-%m-%d')" >> $GITHUB_OUTPUT
+      
       # - name: Conditional to run on STAGE - Copy data from Secrets to cypress.${{github.event.inputs.environment}}.json
       #   if: github.event.inputs.environment == 'stage'
       #   run: |

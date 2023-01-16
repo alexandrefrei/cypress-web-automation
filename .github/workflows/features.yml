@@ -52,14 +52,14 @@ jobs:
         uses: actions/upload-artifact@v3
         if: failure()
         with:
-          name: cypress-screenshot
+          name: 'cypress-screenshot-${{ steps.date.outputs.date }}'
           path: cypress/screenshots
 
       - name: Upload HTML Test Report
         uses: actions/upload-artifact@v3
         if: always()
         with:
-          name: 'Cypress-Test-Report-${{ steps.date.outputs.date }}'
+          name: 'cypress-test-report-${{ steps.date.outputs.date }}'
           path: cypress/reports/index.html
 
       - name: Create Test Summary
@@ -67,7 +67,15 @@ jobs:
         if: always()
         with:
           paths: cypress/reports/junit/**/*.xml
-
+          
+      - name: Get test failure information from Cypress report
+        id: set_var
+        run: |
+          content=`cat /home/runner/work/cypress/reports/mochawesome/mochawesome.json`
+          content="${content//'%'/'%25'}"
+          content="${content//$'\n'/'%0A'}"
+          content="${content//$'\r'/'%0D'}"
+          echo "::set-output name=packageJson::$content"
       #- name: Cypress Report Summary
       # run: echo "### Cypress Report Summary! :rocket:" >> $GITHUB_STEP_SUMMARY
 

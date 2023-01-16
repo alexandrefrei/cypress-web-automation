@@ -21,6 +21,13 @@ describe('Purchase Products', () => {
     cy.login(USER, PASSWORD);
   });*/
 
+  it('visible Test', { tags: '@smoke' }, () => {
+    cy.get("[data-cy='header-login']").should('be.visible');
+  });
+  it('enable Test', { tags: '@smoke' }, () => {
+    cy.get("[data-cy='header-login']").should('be.visible');
+  });
+
   it('Purchase All T-Shirts', { tags: '@smoke' }, () => {
     cy.get("[data-cy='header-login']").should('not.be.visible');
 

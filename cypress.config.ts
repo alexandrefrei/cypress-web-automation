@@ -8,34 +8,17 @@ const {
   beforeRunHook,
   afterRunHook,
 } = require('cypress-mochawesome-reporter/lib');
-const exec = require('child_process').execSync;
 
 export default defineConfig({
-  /*reporter: 'cypress-mochawesome-reporter',
-  reporterOptions: {
-    charts: true,
-    reportDir: 'cypress/report',
-    reportPageTitle: 'custom-title',
-    embeddedScreenshots: true,
-    inlineAssets: true,
-    saveAllAttempts: false,
-  },*/
   e2e: {
     setupNodeEvents(on, config) {
       on('before:run', async (details) => {
         console.log('override before:run');
         await beforeRunHook(details);
-        //If you are using other than Windows remove below two lines
-        //await exec("IF EXIST cypress\\screenshots rmdir /Q /S cypress\\screenshots")
-        //await exec("IF EXIST cypress\\reports rmdir /Q /S cypress\\reports")
       });
       on('after:run', async () => {
         console.log('override after:run');
-
-        //if you are using other than Windows remove below line (having await exec)
-        //await exec(
         ('npx jrm ./cypress/reports/junitreport.xml ./cypress/reports/junit/*.xml');
-        //);
         await afterRunHook();
       });
 
@@ -48,7 +31,7 @@ export default defineConfig({
         },
       }); //For running sql query
 
-      //require('cypress-mochawesome-reporter/plugin')(on);
+      require('cypress-mochawesome-reporter/plugin')(on);
       AllureWriter(on, config);
 
       const environment: string = config.env.configFile;

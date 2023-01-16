@@ -9,7 +9,7 @@
     "cy:run": "cypress run --browser chrome --env configFile=stage --spec cypress/e2e/buyProducts.spec.ts",
     "cy:run:CI": "cypress run --browser chrome --env configFile=GitHub",
     "cy:smoke": "npx cypress run --browser chrome --env configFile=stage,grepTags=@smoke",
-    "cy:run:allure": "cypress run --browser chrome --env configFile=stg allure=true",
+    "cy:run:allure": "cypress run --browser chrome --spec cypress/e2e/buyProducts.spec.ts --env configFile=stage allure=true",
     "allure:ALL": "npm run allure:generate && npm run allure:open",
     "allure:generate": "allure generate allure-results",
     "allure:open": "allure open allure-report",

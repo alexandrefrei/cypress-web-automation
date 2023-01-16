@@ -1,5 +1,5 @@
 {
-  "baseUrl": "https://www.yieldstreet.com",
+  "baseUrl": "https://www.saucedemo.com",
   "env": {
     "environment": "staging",
     "user": "standard_user",
@@ -22,14 +22,17 @@
       "charts": true,
       "reportPageTitle": "EdgeIQ Test Report",
       "embeddedScreenshots": true,
-      "inlineAssets": true
+      "inlineAssets": true,
+      "code": true,
+      "showHooks": true
     },
     "mochawesomeReporterOptions": {
       "reportDir": "cypress/reports/mochawesome",
       "quite": true,
       "overwrite": false,
       "html": false,
-      "json": true
+      "json": true,
+      "code": true
     },
     "mochaJunitReporterReporterOptions": {
       "mochaFile": "cypress/reports/junit/results-[hash].xml"
@@ -45,7 +48,7 @@
   "viewportHeight": 1200,
   "videoUploadOnPasses": false,
   "retries": {
-    "runMode": 1,
-    "openMode": 1
+    "runMode": 0,
+    "openMode": 0
   }
 }

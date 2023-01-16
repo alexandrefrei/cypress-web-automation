@@ -75,8 +75,7 @@ jobs:
           content="${content//'%'/'%25'}"
           content="${content//$'\n'/'%0A'}"
           content="${content//$'\r'/'%0D'}"
-          echo "::set-output name=packageJson::$content"
-        #echo "packageJson=${content}" >> $GITHUB_OUTPUT
+          echo "packageJson=${content}" >> $GITHUB_OUTPUT
        
       - name: Read JSON file
         run: |
@@ -86,6 +85,7 @@ jobs:
           echo "See results at: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}"
 
       #echo "${{steps.set_var.outputs.packageJson}}"
+      #echo "::set-output name=packageJson::$content"
       ##- name: Git ID
       ##if: always()
       ##run: |

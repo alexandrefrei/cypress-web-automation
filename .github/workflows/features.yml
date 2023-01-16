@@ -71,7 +71,7 @@ jobs:
       - name: Get test failure information from Cypress report
         id: set_var
         run: |
-          content=`cat /home/runner/work/cypress/reports/mochawesome/mochawesome.json`
+          content=`cat /home/runner/work/cypress-web-automation/cypress-web-automation/cypress/reports/mochawesome/mochawesome.json`
           content="${content//'%'/'%25'}"
           content="${content//$'\n'/'%0A'}"
           content="${content//$'\r'/'%0D'}"

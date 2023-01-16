@@ -76,9 +76,11 @@ jobs:
           content="${content//$'\n'/'%0A'}"
           content="${content//$'\r'/'%0D'}"
           echo "::set-output name=packageJson::$content"
-      #- name: Cypress Report Summary
-      # run: echo "### Cypress Report Summary! :rocket:" >> $GITHUB_STEP_SUMMARY
-
+          
+      - name: Read JSON file
+        run: |
+          echo "Cypress Tests finished with ${{fromJson(steps.set_var.outputs.packageJson).stats.failures}}"
+          
       ##- name: Git ID
       ##if: always()
       ##run: |

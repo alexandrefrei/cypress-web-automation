@@ -70,6 +70,7 @@ jobs:
 
       - name: Get test failure information from Cypress report
         id: set_var
+        if: always()
         run: |
           content=`cat /home/runner/work/cypress-web-automation/cypress-web-automation/cypress/reports/mochawesome/mochawesome.json`
           content="${content//'%'/'%25'}"
@@ -78,6 +79,7 @@ jobs:
           echo "::set-output name=packageJson::$content"
        
       - name: Reading Cypress Report from JSON file
+        if: always()
         run: |
           echo "Cypress Report JSON file: ${{steps.set_var.outputs.packageJson}}"
           echo "Number of Cypress tests run: ${{fromJson(steps.set_var.outputs.packageJson).stats.tests}}"
@@ -93,6 +95,7 @@ jobs:
       - name: Slack Notification
         id: slack
         uses: slackapi/slack-github-action@v1.22.0
+        if: always()
         with:
           channel-id: 'C04J1G54BPU'
           payload: |

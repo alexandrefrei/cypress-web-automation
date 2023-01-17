@@ -117,7 +117,7 @@ jobs:
                   "fields": [
                     {
                       "type": "mrkdwn",
-                      "text": ":calendar: *Executed Date*: 2023-01-16-21-02"
+                      "text": ":calendar: *Executed Date*: ${{ steps.date.outputs.date }}"
                     }
                   ]
                 },
@@ -126,7 +126,7 @@ jobs:
                   "fields": [
                     {
                       "type": "mrkdwn",
-                      "text": "*:test_tube: Executed tests:* 50"
+                      "text": "*:test_tube: Executed tests:* ${{fromJson(steps.set_var.outputs.packageJson).stats.tests}}"
                     }
                   ]
                 },
@@ -135,7 +135,7 @@ jobs:
                   "fields": [
                     {
                       "type": "mrkdwn",
-                      "text": "*:X: Failed Tests:* 16"
+                      "text": "*:X: Failed Tests:* ${{fromJson(steps.set_var.outputs.packageJson).stats.failures}}"
                     }
                   ]
                 },
@@ -144,7 +144,16 @@ jobs:
                   "fields": [
                     {
                       "type": "mrkdwn",
-                      "text": "*:white_check_mark: Passed Tests:* 10"
+                      "text": "*:white_check_mark: Passed Tests:* ${{fromJson(steps.set_var.outputs.packageJson).stats.passes}}"
+                    }
+                  ]
+                },
+                {
+                  "type": "section",
+                  "fields": [
+                    {
+                      "type": "mrkdwn",
+                      "text": "* Job Status:* ${{ job.status }}"
                     }
                   ]
                 },

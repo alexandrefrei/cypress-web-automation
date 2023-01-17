@@ -76,8 +76,8 @@ jobs:
           content="${content//'%'/'%25'}"
           content="${content//$'\n'/'%0A'}"
           content="${content//$'\r'/'%0D'}"
-          echo "::set-output name=packageJson::$content"
-       
+          echo "packageJson=$(content)" >> $GITHUB_OUTPUT
+         
       - name: Reading Cypress Report from JSON file
         if: always()
         run: |
@@ -88,10 +88,11 @@ jobs:
           echo "See results at: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}"
           echo "GitHub Action build result: ${{ job.status }}"
 
+
       #echo "${{steps.set_var.outputs.packageJson}}"
       #echo "::set-output name=packageJson::$content"
       #echo "packageJson={content}" >> $GITHUB_OUTPUT
-     
+      
       - name: Slack Notification
         id: slack
         uses: slackapi/slack-github-action@v1.22.0

@@ -73,7 +73,7 @@ jobs:
         if: always()
         run: |
           content=`cat /home/runner/work/cypress-web-automation/cypress-web-automation/cypress/reports/mochawesome/mochawesome.json`
-          echo "packageJson=$(content)" >> $GITHUB_OUTPUT
+          echo "packageJson=${content}" >> $GITHUB_OUTPUT
          
       - name: Reading Cypress Report from JSON file
         if: always()

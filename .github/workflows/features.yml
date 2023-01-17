@@ -88,7 +88,85 @@ jobs:
 
       #echo "${{steps.set_var.outputs.packageJson}}"
       #echo "::set-output name=packageJson::$content"
-     #echo "packageJson={content}" >> $GITHUB_OUTPUT
+      #echo "packageJson={content}" >> $GITHUB_OUTPUT
+     
+      - name: Slack Notification
+        id: slack
+        uses: slackapi/slack-github-action@v1.22.0
+        with:
+          channel-id: 'C04J1G54BPU'
+          payload: |
+            {
+              "blocks": [
+                {
+                  "type": "header",
+                  "text": {
+                    "type": "plain_text",
+                    "text": "Cypress Workflow: Feature Job :rocket:",
+                    "emoji": true
+                  }
+                },
+                {
+                  "type": "divider"
+                },
+                {
+                  "type": "section",
+                  "fields": [
+                    {
+                      "type": "mrkdwn",
+                      "text": ":calendar: *Executed Date*: 2023-01-16-21-02"
+                    }
+                  ]
+                },
+                {
+                  "type": "section",
+                  "fields": [
+                    {
+                      "type": "mrkdwn",
+                      "text": "*:test_tube: Executed tests:* 50"
+                    }
+                  ]
+                },
+                {
+                  "type": "section",
+                  "fields": [
+                    {
+                      "type": "mrkdwn",
+                      "text": "*:X: Failed Tests:* 16"
+                    }
+                  ]
+                },
+                {
+                  "type": "section",
+                  "fields": [
+                    {
+                      "type": "mrkdwn",
+                      "text": "*:white_check_mark: Passed Tests:* 10"
+                    }
+                  ]
+                },
+                {
+                  "type": "section",
+                  "text": {
+                    "type": "mrkdwn",
+                    "text": "See results at:"
+                  },
+                  "accessory": {
+                    "type": "button",
+                    "text": {
+                      "type": "plain_text",
+                      "text": "Gitub Job :bug:",
+                      "emoji": true
+                    },
+                    "url": "https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}",
+                    "action_id": "button-action"
+                  }
+                }
+              ]
+            }
+        env:
+          SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
+     
       ##- name: Git ID
       ##if: always()
       ##run: |

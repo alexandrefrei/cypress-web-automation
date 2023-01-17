@@ -31,7 +31,7 @@ jobs:
       - name: Get current date
         id: date
         run: |
-          echo "date=$(date +'%Y-%m-%d-%H-%M')" >> $GITHUB_OUTPUT
+          echo "date=$(date +'%Y-%m-%d %H-%M')" >> $GITHUB_OUTPUT
 
       # - name: Conditional to run on STAGE - Copy data from Secrets to cypress.${{github.event.inputs.environment}}.json
       #   if: github.event.inputs.environment == 'stage'
@@ -95,7 +95,7 @@ jobs:
       - name: Slack Notification
         id: slack
         uses: slackapi/slack-github-action@v1.22.0
-        if: failure()
+        #if: failure()
         with:
           channel-id: 'C04J1G54BPU'
           payload: |

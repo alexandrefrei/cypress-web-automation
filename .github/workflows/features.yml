@@ -95,7 +95,7 @@ jobs:
       - name: Slack Notification
         id: slack
         uses: slackapi/slack-github-action@v1.22.0
-        if: always()
+        if: failure()
         with:
           channel-id: 'C04J1G54BPU'
           payload: |
@@ -187,47 +187,3 @@ jobs:
       #with:
       # command: npx cypress run --browser ${{github.event.inputs.browser}} --env configFile=${{github.event.inputs.environment}} --spec ${{github.event.inputs.specs}}
       #
-
-      # Slack channel id, channel name, or user id to post message.
-      # See also: https://api.slack.com/methods/chat.postMessage#channels
-      # You can pass in multiple channels to post to by providing a comma-delimited list of channel IDs.
-      # C04J1G54BPU - Cypress Notification channel
-
-      # - name: Post to a Slack channel
-      #   id: slack
-      #   uses: slackapi/slack-github-action@v1.23.0
-      #   with:
-      #     channel-id: 'C04J1G54BPU'
-      #     payload: |
-      #      {
-      #       "blocks": [
-      #        {
-      #           "type": "divider"
-      #        },
-      #        {
-      #           "type": "image",
-      #           "title": {
-      #             "type": "plain_text",
-      #             "text": "Testing Slack",
-      #             "emoji": true
-      #           },
-      #           "image_url": "https://yt3.ggpht.com/iD0oePTGV8tZwEEP_WEG2rvyNiQAVfmjhawFMCj17ARjjmw-J70k9NDjSE5QTzD9Vk3ayBU=s900-c-k-c0x00ffffff-no-rj",
-      #           "alt_text": "marg"
-      #         },
-      #         {
-      #           "type": "actions",
-      #           "elements": [
-      #             {
-      #               "type": "button",
-      #               "text": {
-      #                 "type": "plain_text",
-      #                 "text": "FEATURE_MODE"
-      #               },
-      #               "url": "https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}"
-      #             }
-      #           ]
-      #         }
-      #       ]
-      #      }
-      #   env:
-      #     SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}

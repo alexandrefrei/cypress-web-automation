@@ -2,6 +2,21 @@ name: E2E Cypress tests
 
 on:
   workflow_dispatch:
+  inputs:
+      environment:
+        description: 'Select the environment to run the tests: dev / stage / prod'
+        required: true
+        default: 'stage'
+      browser:
+        description: 'Select the  browser to run the tests: chrome / electron'
+        required: true
+        default: 'chrome'
+      tag:
+        description: 'Test scenario tags: @regressivo / @smoke / @login'
+        required: false
+        default: '@regressivo'
+  schedule:
+    - cron: "0 0 * * *"
     
 env:
   DEFAULT_ENV: "stg"

@@ -2,7 +2,7 @@ name: E2E Cypress tests
 
 on:
   workflow_dispatch:
-  inputs:
+   inputs:
       environment:
         description: 'Select the environment to run the tests: dev / stage / prod'
         required: true

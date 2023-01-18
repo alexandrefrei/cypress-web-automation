@@ -48,7 +48,13 @@ jobs:
         with:
           command: npx cypress run --browser ${{github.event.inputs.browser}} --env configFile=${{github.event.inputs.environment}} --spec ${{github.event.inputs.specs}}
 
-      - name: Upload screenshot
+      - name: Create Test Summary
+        uses: test-summary/action@v2
+        if: always()
+        with:
+          paths: cypress/reports/junit/**/*.xml
+          
+      - name: Upload Screenshot
         uses: actions/upload-artifact@v3
         if: failure()
         with:
@@ -57,16 +63,10 @@ jobs:
 
       - name: Upload HTML Test Report
         uses: actions/upload-artifact@v3
-        if: always()
+        if: failure()
         with:
           name: 'cypress-test-report-${{ steps.date.outputs.date }}'
           path: cypress/reports/index.html
-
-      - name: Create Test Summary
-        uses: test-summary/action@v2
-        if: always()
-        with:
-          paths: cypress/reports/junit/**/*.xml
 
       - name: Get test failure information from Cypress report
         id: set_var
@@ -89,7 +89,6 @@ jobs:
           echo "GitHub Action build result: ${{ job.status }}"
 
 
-     
       #echo "::set-output name=packageJson::$content"
       #echo "packageJson={content}" >> $GITHUB_OUTPUT
       

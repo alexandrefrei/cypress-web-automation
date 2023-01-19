@@ -83,7 +83,7 @@ jobs:
           echo "::set-output name=packageJson::$content"
           
       - name: Adding the values
-        run: "Adding the values"
+        run: echo "Adding the values"
         env:
           TOTAL_TESTS: ${{fromJson(steps.set_var.outputs.packageJson).stats.tests}}
           PENDING_TESTS: ${{fromJson(steps.set_var.outputs.packageJson).stats.pending}}

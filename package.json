@@ -6,7 +6,7 @@
   "scripts": {
     "cy:open:stg": "cypress open --e2e --browser chrome --env configFile=stage",
     "cy:open:qa": "cypress open --e2e --browser chrome --env configFile=qa",
-    "cy:run": "cypress run --browser chrome --env configFile=stage --spec cypress/e2e/buyProducts.spec.ts",
+    "cy:run": "cypress run --browser chrome --env configFile=stage allure=true --spec cypress/e2e/buyProducts.spec.ts",
     "cy:run:CI": "cypress run --browser chrome --env configFile=GitHub",
     "cy:smoke": "npx cypress run --browser chrome --env configFile=stage,grepTags=@smoke",
     "cy:run:allure": "cypress run --browser chrome --spec cypress/e2e/buyProducts.spec.ts --env configFile=stage allure=true",
@@ -16,6 +16,7 @@
     "allure:clear:windows": "if exist allure-results rmdir /s /q allure-results && if exist allure-report rmdir /s /q allure-report",
     "allure:clear": "rm -r allure-results/ allure-report || true",
     "mochawesome:clear": "if exist cypress\\reports rmdir /s /q cypress\\reports && if exist cypress\\screenshots rmdir /s /q cypress\\screenshots ",
+    "combine:reports": "mochawesome-merge ./cypress/reports/mochawesome/*.json -o ./cypress/reports/combineReports.json",
     "prettier-check": "prettier --config .prettierrc --check cypress/**/*.{js,ts}",
     "prettier-write": "prettier --config .prettierrc --write cypress/**/*.{js,ts}",
     "lint-check": "eslint --config .eslintrc.json . --ext .ts",
@@ -41,7 +42,8 @@
     "junit-report-merger": "^4.0.0",
     "lint-staged": "^13.0.3",
     "mocha-junit-reporter": "^2.2.0",
-    "mochawesome": "^7.1.3"
+    "mochawesome": "^7.1.3",
+    "mochawesome-merge": "^4.2.2"
   },
   "dependencies": {
     "@types/fs-extra": "^9.0.13",

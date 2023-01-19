@@ -30,7 +30,7 @@
       "overwrite": false,
       "html": false,
       "json": true,
-      "code":false
+      "code": false
     },
     "mochaJunitReporterReporterOptions": {
       "mochaFile": "cypress/reports/junit/results-[hash].xml"

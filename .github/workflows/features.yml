@@ -91,7 +91,9 @@ jobs:
           FAILURES_TESTS: ${{fromJson(steps.set_var.outputs.packageJson).stats.failures}}
           
       - name: showing the results
-        run: echo "Total $TOTAL_TESTS"
+        run: | 
+         echo "Total $(($TOTAL_TESTS))"
+        
          
       - name: Reading Cypress Report from JSON file
         if: always()

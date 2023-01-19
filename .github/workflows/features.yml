@@ -83,8 +83,12 @@ jobs:
           echo "::set-output name=packageJson::$content"
         env:
           TOTAL_TESTS: ${{fromJson(steps.set_var.outputs.packageJson).stats.tests}}
-          PENDING_TESTS: ${{fromJson(steps.set_var.outputs.packageJson).stats.tests}}
+          PENDING_TESTS: ${{fromJson(steps.set_var.outputs.packageJson).stats.pending}}
+          PASS_TESTS: ${{fromJson(steps.set_var.outputs.packageJson).stats.passes}}
+          FAILURES_TESTS: ${{fromJson(steps.set_var.outputs.packageJson).stats.failures}}
           
+      - name: showing the results
+        run: expr 3 + 7
          
       - name: Reading Cypress Report from JSON file
         if: always()

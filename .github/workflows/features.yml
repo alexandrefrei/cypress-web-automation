@@ -48,7 +48,7 @@ jobs:
         with:
           command: npx cypress run --browser ${{github.event.inputs.browser}} --env configFile=${{github.event.inputs.environment}} --spec ${{github.event.inputs.specs}}
   
-      - name: Combine all the JSON report in just one Report
+      - name: Combining all the JSON reports in just one Report
         if: always()
         run: yarn run combine:reports
       
@@ -72,7 +72,7 @@ jobs:
           name: 'cypress-test-report-${{ steps.date.outputs.date }}'
           path: cypress/reports/index.html
 
-      - name: Get test failure information from Cypress report
+      - name: Get Test Information from Cypress Report
         id: set_var
         if: always()
         run: |
@@ -85,7 +85,7 @@ jobs:
       - name: Reading Cypress Report from JSON file
         if: always()
         run: |
-          echo "Cypress Report JSON file:\n${{steps.set_var.outputs.packageJson}}"
+          echo "Cypress Report JSON file:\n ${{steps.set_var.outputs.packageJson}}"
         
       #echo "::set-output name=packageJson::$content"
       #echo "packageJson={content}" >> $GITHUB_OUTPUT

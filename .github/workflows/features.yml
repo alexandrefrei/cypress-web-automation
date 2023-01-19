@@ -83,16 +83,16 @@ jobs:
           echo "::set-output name=packageJson::$content"
           
       - name: Adding the values
-        run: echo "Adding the values"
         env:
           TOTAL_TESTS: ${{fromJson(steps.set_var.outputs.packageJson).stats.tests}}
           PENDING_TESTS: ${{fromJson(steps.set_var.outputs.packageJson).stats.pending}}
           PASS_TESTS: ${{fromJson(steps.set_var.outputs.packageJson).stats.passes}}
           FAILURES_TESTS: ${{fromJson(steps.set_var.outputs.packageJson).stats.failures}}
+        run: echo ""GITHUB_RUN_NUMBER_WITH_OFFSET=$(($TOTAL_TESTS + 200))" >> $GITHUB_ENV"
           
-      - name: showing the results
+      - name: Perform Operation with ID ${{ env.GITHUB_RUN_NUMBER_WITH_OFFSET }}'
         run: | 
-         echo "Total $(($TOTAL_TESTS))"
+         echo "Success!"
         
          
       - name: Reading Cypress Report from JSON file

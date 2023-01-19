@@ -47,7 +47,11 @@ jobs:
         uses: cypress-io/github-action@v5
         with:
           command: npx cypress run --browser ${{github.event.inputs.browser}} --env configFile=${{github.event.inputs.environment}} --spec ${{github.event.inputs.specs}}
-
+  
+      - name: Combine all the JSON report in just one Report
+        if: always()
+        run: yarn run combine:reports
+      
       - name: Create Test Summary
         uses: test-summary/action@v2
         if: always()
@@ -72,7 +76,7 @@ jobs:
         id: set_var
         if: always()
         run: |
-          content=$(cat /home/runner/work/cypress-web-automation/cypress-web-automation/cypress/reports/mochawesome/mochawesome.json)
+          content=$(cat /home/runner/work/cypress-web-automation/cypress-web-automation/cypress/reports/combineReports.json)
           content="${content//'%'/'%25'}"
           content="${content//$'\n'/'%0A'}"
           content="${content//$'\r'/'%0D'}"

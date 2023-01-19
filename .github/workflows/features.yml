@@ -81,11 +81,16 @@ jobs:
           content="${content//$'\n'/'%0A'}"
           content="${content//$'\r'/'%0D'}"
           echo "::set-output name=packageJson::$content"
+        env:
+          TOTAL_TESTS: ${{fromJson(steps.set_var.outputs.packageJson).stats.tests}}
+          PENDING_TESTS: ${{fromJson(steps.set_var.outputs.packageJson).stats.tests}}
+          
          
       - name: Reading Cypress Report from JSON file
         if: always()
         run: |
           echo "Cypress Report JSON file:\n ${{steps.set_var.outputs.packageJson}}"
+        
         
       #echo "::set-output name=packageJson::$content"
       #echo "packageJson={content}" >> $GITHUB_OUTPUT

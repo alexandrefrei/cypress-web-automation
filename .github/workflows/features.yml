@@ -93,8 +93,8 @@ jobs:
       - name: Test Report
         run: | 
          echo "Executed Tests: ${{ env.EXECUTED_TESTS }}"
-         echo "Pass Tests: $(( env.PASS_TESTS ))"
-         echo "Fail Tests: $(( env.FAILURES_TESTS ))"
+         echo "Pass Tests: $PASS_TESTS"
+         echo "Fail Tests: $FAILURES_TESTS"
         
          
       - name: Reading Cypress Report from JSON file

@@ -88,46 +88,110 @@ jobs:
           PENDING_TESTS: ${{fromJson(steps.set_var.outputs.packageJson).stats.pending}}
         run: | 
           echo "EXECUTED_TESTS=$(($TOTAL_TESTS - PENDING_TESTS))" >> $GITHUB_ENV
-          echo "PASS_TEST=${{fromJson(steps.set_var.outputs.packageJson).stats.passes}}" >> $GITHUB_ENV
+          echo "PASS_TEST=${{fromJson(steps.set_var.outputs.packageJson).stats.passes}}" >> $GITHUB_ENV 
           echo "action_state=yellow" >> $GITHUB_ENV
-          
-      - name: Test Report
-        run: | 
-         echo "Executed Tests: ${{ env.EXECUTED_TESTS }}"
-         echo "Pass Tests: ${{ env.PASS_TESTS }}"
-         echo "Action: ${{ env.action_state }}"
-         
+                   
       - name: Reading Cypress Report from JSON file
         if: always()
         run: |
           echo "Cypress Report JSON file:\n ${{steps.set_var.outputs.packageJson}}"
         
-        
-      #echo "::set-output name=packageJson::$content"
-      #echo "packageJson={content}" >> $GITHUB_OUTPUT
-      
-      #content="${content//'%'/'%25'}"
-      #content="${content//$'\n'/'%0A'}"
-      #content="${content//$'\r'/'%0D'}"
-      #echo "${content}"
-      
+      - name: Slack Notification
+        id: slack
+        uses: slackapi/slack-github-action@v1.22.0
+        if: failure()
+        with:
+          channel-id: '32312fef'
+          payload: |
+            {
+              "blocks": [
+                {
+                  "type": "header",
+                  "text": {
+                    "type": "plain_text",
+                    "text": "Cypress Workflow: Feature Job :rocket:",
+                    "emoji": true
+                  }
+                },
+                {
+                  "type": "divider"
+                },
+                {
+                  "type": "section",
+                  "fields": [
+                    {
+                      "type": "mrkdwn",
+                      "text": ":calendar: *Executed Date*: ${{ steps.date.outputs.date }}"
+                    }
+                  ]
+                },
+                {
+                  "type": "section",
+                  "fields": [
+                    {
+                      "type": "mrkdwn",
+                      "text": "*:bar_chart: Number of Suites:* ${{fromJson(steps.set_var.outputs.packageJson).stats.suites}}"
+                    }
+                  ]
+                },
+                {
+                  "type": "section",
+                  "fields": [
+                    {
+                      "type": "mrkdwn",
+                      "text": "*:test_tube: Executed Tests:* ${{ env.EXECUTED_TESTS }}"
+                    }
+                  ]
+                },
+                {
+                  "type": "section",
+                  "fields": [
+                    {
+                      "type": "mrkdwn",
+                      "text": "*:X: Failed Tests:* ${{fromJson(steps.set_var.outputs.packageJson).stats.failures}}"
+                    }
+                  ]
+                },
+                {
+                  "type": "section",
+                  "fields": [
+                    {
+                      "type": "mrkdwn",
+                      "text": "*:white_check_mark: Passed Tests:* ${{fromJson(steps.set_var.outputs.packageJson).stats.passes}}"
+                    }
+                  ]
+                },
+                {
+                  "type": "section",
+                  "fields": [
+                    {
+                      "type": "mrkdwn",
+                      "text": "* Job Status:* ${{ job.status }}"
+                    }
+                  ]
+                },
+                {
+                  "type": "section",
+                  "text": {
+                    "type": "mrkdwn",
+                    "text": "See results at:"
+                  },
+                  "accessory": {
+                    "type": "button",
+                    "text": {
+                      "type": "plain_text",
+                      "text": "Gitub Job :bug:",
+                      "emoji": true
+                    },
+                    "url": "https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}",
+                    "action_id": "button-action"
+                  }
+                }
+              ]
+            }
+        env:
+          SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
       
      
      
-      ##- name: Git ID
-      ##if: always()
-      ##run: |
-      #echo 'JOB LINK: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}'
-      #'JOB NAME: ${{ github.run_name }}
-      #'NAME: ${{ inputs.run_name }}
-      #'JOB: ${{ github.action.name }}
-      #'BRANCH NAME: ${{ github.ref_name }}
-      #'JOB STATUS: ${{ job.status }}
-      #'JOB ENV: ${{github.event.inputs.environment}}
-      #'RUNNER NAME': ${{ runner.name }}
-
-      #- name: Cypress run
-      #uses: cypress-io/github-action@v5
-      #with:
-      # command: npx cypress run --browser ${{github.event.inputs.browser}} --env configFile=${{github.event.inputs.environment}} --spec ${{github.event.inputs.specs}}
-      #
+     

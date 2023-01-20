@@ -88,11 +88,13 @@ jobs:
           PENDING_TESTS: ${{fromJson(steps.set_var.outputs.packageJson).stats.pending}}
           PASS_TESTS: ${{fromJson(steps.set_var.outputs.packageJson).stats.passes}}
           FAILURES_TESTS: ${{fromJson(steps.set_var.outputs.packageJson).stats.failures}}
-        run: echo "GITHUB_RUN_NUMBER_WITH_OFFSET=$(($TOTAL_TESTS + 200))" >> $GITHUB_ENV
+        run: echo "EXECUTED_TESTS=$(($TOTAL_TESTS - PENDING_TESTS))" >> $GITHUB_ENV
           
-      - name: Perform Operation with ID ${{ env.GITHUB_RUN_NUMBER_WITH_OFFSET }}'
+      - name: Test Report
         run: | 
-         echo "Success!"
+         echo "Executed Tests: ${{ env.EXECUTED_TESTS }}"
+         echo "Pass Tests: ${{ PASS_TESTS }}"
+         echo "Fail Tests: ${{ FAILURES_TESTS }}"
         
          
       - name: Reading Cypress Report from JSON file

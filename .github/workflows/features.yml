@@ -82,13 +82,13 @@ jobs:
           content="${content//$'\r'/'%0D'}"
           echo "::set-output name=packageJson::$content"
           
-      - name: Adding the values
+      - name: Get Total executed tests
         env:
           TOTAL_TESTS: ${{fromJson(steps.set_var.outputs.packageJson).stats.tests}}
           PENDING_TESTS: ${{fromJson(steps.set_var.outputs.packageJson).stats.pending}}
         run: |  
-          echo "PASS_TESTS=${{fromJson(steps.set_var.outputs.packageJson).stats.passes}}" >> $GITHUB_ENV
-          echo "FAILURES_TESTS=${{fromJson(steps.set_var.outputs.packageJson).stats.failures}}" >> $GITHUB_ENV
+          echo "PASS_TESTS=$((fromJson(steps.set_var.outputs.packageJson).stats.passes))" >> $GITHUB_ENV
+          echo "FAILURES_TESTS=$((fromJson(steps.set_var.outputs.packageJson).stats.failures))" >> $GITHUB_ENV
           echo "EXECUTED_TESTS=$(($TOTAL_TESTS - PENDING_TESTS))" >> $GITHUB_ENV
           
       - name: Test Report

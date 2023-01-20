@@ -86,15 +86,16 @@ jobs:
         env:
           TOTAL_TESTS: ${{fromJson(steps.set_var.outputs.packageJson).stats.tests}}
           PENDING_TESTS: ${{fromJson(steps.set_var.outputs.packageJson).stats.pending}}
-          PASS_TESTS: ${{fromJson(steps.set_var.outputs.packageJson).stats.passes}}
-          FAILURES_TESTS: ${{fromJson(steps.set_var.outputs.packageJson).stats.failures}}
-        run: echo "EXECUTED_TESTS=$(($TOTAL_TESTS - PENDING_TESTS))" >> $GITHUB_ENV
+        run: |  
+          echo "PASS_TESTS=${{fromJson(steps.set_var.outputs.packageJson).stats.passes}}" >> $GITHUB_ENV
+          echo "FAILURES_TESTS=${{fromJson(steps.set_var.outputs.packageJson).stats.failures}}" >> $GITHUB_ENV
+          echo "EXECUTED_TESTS=$(($TOTAL_TESTS - PENDING_TESTS))" >> $GITHUB_ENV
           
       - name: Test Report
         run: | 
-         echo "Executed Tests: ${{ env.EXECUTED_TESTS }}"
-         echo "Pass Tests: $PASS_TESTS"
-         echo "Fail Tests: $FAILURES_TESTS"
+         echo "Executed Tests: ${{ env.PASS_TESTS }}"
+         echo "Pass Tests: ${{ env.EXECUTED_TESTS }}
+         echo "Fail Tests: ${{ env.FAILURES_TESTS }}
         
          
       - name: Reading Cypress Report from JSON file

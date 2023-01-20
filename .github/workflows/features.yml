@@ -89,11 +89,13 @@ jobs:
         run: | 
           echo "EXECUTED_TESTS=$(($TOTAL_TESTS - PENDING_TESTS))" >> $GITHUB_ENV
           echo "PASS_TEST=${{fromJson(steps.set_var.outputs.packageJson).stats.passes}}" >> $GITHUB_ENV
+          echo "action_state=yellow" >> $GITHUB_ENV
           
       - name: Test Report
         run: | 
          echo "Executed Tests: ${{ env.EXECUTED_TESTS }}"
          echo "Pass Tests: ${{ env.PASS_TESTS }}"
+         echo "Action: ${{ env.action_state }}"
          
       - name: Reading Cypress Report from JSON file
         if: always()

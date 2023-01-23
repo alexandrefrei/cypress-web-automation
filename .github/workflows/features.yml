@@ -110,9 +110,10 @@ jobs:
         uses: slackapi/slack-github-action@v1.22.0
         if: failure()
         with:
-          channel-id: '32312fef'
+          channel-id: 'C04J1G54BPU'
           payload: |
             {
+              "text": "GitHub Action",
               "blocks": [
                 {
                   "type": "header",

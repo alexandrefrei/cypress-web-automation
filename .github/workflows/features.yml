@@ -107,8 +107,8 @@ jobs:
       #
       - name: Slack Notification
         id: slack
-        uses: slackapi/slack-github-action@v1.22.0
-        if: failure()
+        uses: slackapi/slack-github-action@v1.23.0
+        if: always()
         with:
           channel-id: 'C04J1G54BPU'
           payload: |
@@ -131,7 +131,7 @@ jobs:
                   "fields": [
                     {
                       "type": "mrkdwn",
-                      "text": ":calendar: *Executed Date*: ${{ steps.date.outputs.date }}"
+                      "text": ":calendar: *Executed Date:* ${{ steps.date.outputs.date }}"
                     }
                   ]
                 },
@@ -140,7 +140,7 @@ jobs:
                   "fields": [
                     {
                       "type": "mrkdwn",
-                      "text": "*:bar_chart: Number of Suites:* ${{fromJson(steps.set_var.outputs.packageJson).stats.suites}}"
+                      "text": ":stopwatch: *Total Execution Time:* ${{ env.EXECUTION_TIME }}"
                     }
                   ]
                 },
@@ -149,7 +149,11 @@ jobs:
                   "fields": [
                     {
                       "type": "mrkdwn",
-                      "text": "*:test_tube: Executed Tests:* ${{ env.EXECUTED_TESTS }}"
+                      "text": ":bar_chart: *Number of Suites:* ${{fromJson(steps.set_var.outputs.packageJson).stats.suites}}"
+                    },
+                    {
+                      "type": "mrkdwn",
+                      "text": ":test_tube: *Executed tests:* ${{ env.EXECUTED_TESTS }}"
                     }
                   ]
                 },
@@ -158,25 +162,11 @@ jobs:
                   "fields": [
                     {
                       "type": "mrkdwn",
-                      "text": "*:X: Failed Tests:* ${{fromJson(steps.set_var.outputs.packageJson).stats.failures}}"
-                    }
-                  ]
-                },
-                {
-                  "type": "section",
-                  "fields": [
+                      "text": ":white_check_mark: *Passed Tests:* ${{fromJson(steps.set_var.outputs.packageJson).stats.passes}}"
+                    },
                     {
                       "type": "mrkdwn",
-                      "text": "*:white_check_mark: Passed Tests:* ${{fromJson(steps.set_var.outputs.packageJson).stats.passes}}"
-                    }
-                  ]
-                },
-                {
-                  "type": "section",
-                  "fields": [
-                    {
-                      "type": "mrkdwn",
-                      "text": "* Job Status:* ${{ job.status }}"
+                      "text": ":X: *Failed Tests:* ${{fromJson(steps.set_var.outputs.packageJson).stats.failures}}"
                     }
                   ]
                 },

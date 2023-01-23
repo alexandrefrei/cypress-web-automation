@@ -98,7 +98,7 @@ jobs:
         run: |
           echo "EXECUTED_TESTS=$(($TOTAL_TESTS - PENDING_TESTS))" >> $GITHUB_ENV
           echo "EXECUTION_DURATION=$(($DURATION / 1000))" >> $GITHUB_ENV
-          echo "TEMPO DE EXECUCAO EM SEGUNDOS ${{ env.EXECUTION_DURATION }}
+          echo "TEMPO DE EXECUCAO EM SEGUNDOS: ${{ env.EXECUTION_DURATION }}"
       #
       - name: Slack Notification
         id: slack

@@ -57,7 +57,7 @@ jobs:
         if: always()
         with:
           paths: cypress/reports/junit/**/*.xml
-      #    
+      #
       - name: Upload Screenshot
         uses: actions/upload-artifact@v3
         if: failure()
@@ -81,25 +81,24 @@ jobs:
           content="${content//$'\n'/'%0A'}"
           content="${content//$'\r'/'%0D'}"
           echo "::set-output name=packageJson::$content"
-       
+
       # echo "packageJson=$content" >> $GITHUB_OUTPUT
       # echo "::set-output name=packageJson::$content"
-      #  
+      #
       - name: Reading Cypress Report from JSON file
         if: always()
         run: |
           echo "Cypress Report JSON file:\n ${{steps.set_var.outputs.packageJson}}"
-      
-      
+
       - name: Get Total executed tests
         env:
           TOTAL_TESTS: ${{fromJson(steps.set_var.outputs.packageJson).stats.tests}}
           PENDING_TESTS: ${{fromJson(steps.set_var.outputs.packageJson).stats.pending}}
-        run: | 
+          DURATION: ${{fromJson(steps.set_var.outputs.packageJson).stats.duration}}
+        run: |
           echo "EXECUTED_TESTS=$(($TOTAL_TESTS - PENDING_TESTS))" >> $GITHUB_ENV
-          echo "PASS_TEST=${{fromJson(steps.set_var.outputs.packageJson).stats.passes}}" >> $GITHUB_ENV 
-          echo "action_state=yellow" >> $GITHUB_ENV
-      #  
+          echo "EXECUTION_DURATION=$(($DURATION / 1000))" >> $GITHUB_ENV
+      #
       - name: Slack Notification
         id: slack
         uses: slackapi/slack-github-action@v1.22.0
@@ -195,7 +194,3 @@ jobs:
             }
         env:
           SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
-      
-     
-     
-     

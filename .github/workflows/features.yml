@@ -110,7 +110,7 @@ jobs:
         uses: slackapi/slack-github-action@v1.23.0
         if: always()
         with:
-          channel-id: 'C04J1G54BPU'
+          channel-id: '34234'
           payload: |
             {
               "text": "GitHub Action",

@@ -50,9 +50,7 @@ jobs:
       #
       - name: Combining all JSON reports into a single report
         if: always()
-        run: |
-          yarn run combine:reports
-          echo '/home/runner/work/cypress-web-automation/cypress-web-automation/cypress/reports/combineReport.json'
+        run: yarn run combine:reports
       #
       - name: Create Test Summary
         uses: test-summary/action@v2
@@ -74,7 +72,7 @@ jobs:
           name: 'cypress-test-report-${{ steps.date.outputs.date }}'
           path: cypress/reports/index.html
       #
-      - name: Get Test Information from Cypress Report
+      - name: Get Test Information from mochawesome Report
         id: set_var
         if: always()
         run: |
@@ -87,10 +85,10 @@ jobs:
       # echo "packageJson=$content" >> $GITHUB_OUTPUT
       # echo "::set-output name=packageJson::$content"
       #
-      - name: Reading Cypress Report from JSON file
+      - name: Printing mochawesome report in the console log
         if: always()
         run: |
-          echo "Cypress Report JSON file:\n ${{steps.set_var.outputs.packageJson}}"
+          echo "Mochawesome Report JSON file:\n ${{steps.set_var.outputs.packageJson}}"
 
       - name: Get Total executed tests
         if: always()
@@ -101,11 +99,6 @@ jobs:
         run: |
           echo "EXECUTED_TESTS=$(($TOTAL_TESTS - PENDING_TESTS))" >> $GITHUB_ENV
           echo "EXECUTION_DURATION=$(($DURATION / 1000))" >> $GITHUB_ENV
-      #
-      - name: Duration
-        if: always()
-        run: |
-          echo "Total Execution Time: ${{ env.EXECUTION_DURATION }}"
       #
       - name: Slack Notification
         id: slack

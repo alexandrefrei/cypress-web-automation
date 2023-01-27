@@ -48,9 +48,11 @@ jobs:
         with:
           command: npx cypress run --browser ${{github.event.inputs.browser}} --env configFile=${{github.event.inputs.environment}} --spec ${{github.event.inputs.specs}}
       #
-      - name: Combining all the JSON reports in just one Report
+      - name: Combining all JSON reports into a single report
         if: always()
-        run: yarn run combine:reports
+        run: |
+          yarn run combine:reports
+          echo '/home/runner/work/cypress-web-automation/cypress-web-automation/cypress/reports/combineReport.json'
       #
       - name: Create Test Summary
         uses: test-summary/action@v2

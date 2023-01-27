@@ -53,7 +53,7 @@ jobs:
         run: yarn run combine:reports
       #
       - name: Create Test Summary
-        uses: test-summary/action@v2
+        uses: test-summary/action@v2.1
         if: always()
         with:
           paths: cypress/reports/junit/**/*.xml

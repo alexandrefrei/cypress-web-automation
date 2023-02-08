@@ -48,10 +48,6 @@ jobs:
         with:
           command: npx cypress run --browser ${{github.event.inputs.browser}} --env configFile=${{github.event.inputs.environment}} --spec ${{github.event.inputs.specs}}
       #
-      - name: Combining all JSON reports into a single report
-        if: always()
-        run: yarn run combine:reports
-      #
       - name: Create Test Summary
         uses: test-summary/action@v2.1
         if: always()
@@ -76,7 +72,7 @@ jobs:
         id: set_var
         if: always()
         run: |
-          content=$(cat /home/runner/work/cypress-web-automation/cypress-web-automation/cypress/reports/combineReports.json)
+          content=$(cat /home/runner/work/cypress-web-automation/cypress-web-automation/cypress/reports/index.json)
           content="${content//'%'/'%25'}"
           content="${content//$'\n'/'%0A'}"
           content="${content//$'\r'/'%0D'}"
@@ -90,14 +86,17 @@ jobs:
         run: |
           echo "Mochawesome Report JSON file:\n ${{steps.set_var.outputs.packageJson}}"
 
-      - name: Get Total executed tests
+      - name: Get Duration of Test Execution
         if: always()
         env:
-          TOTAL_TESTS: ${{fromJson(steps.set_var.outputs.packageJson).stats.tests}}
-          PENDING_TESTS: ${{fromJson(steps.set_var.outputs.packageJson).stats.pending}}
+          #TOTAL_TESTS: ${{fromJson(steps.set_var.outputs.packageJson).stats.tests}}
+          #PENDING_TESTS: ${{fromJson(steps.set_var.outputs.packageJson).stats.pending}}
+
+          #This piece of code should be under Run
+          #echo "EXECUTED_TESTS=$(($TOTAL_TESTS - PENDING_TESTS))" >> $GITHUB_ENV
+
           DURATION: ${{fromJson(steps.set_var.outputs.packageJson).stats.duration}}
         run: |
-          echo "EXECUTED_TESTS=$(($TOTAL_TESTS - PENDING_TESTS))" >> $GITHUB_ENV
           echo "EXECUTION_DURATION=$(($DURATION / 1000))" >> $GITHUB_ENV
       #
       - name: Slack Notification
@@ -148,7 +147,7 @@ jobs:
                     },
                     {
                       "type": "mrkdwn",
-                      "text": ":test_tube: *Executed tests:* ${{ env.EXECUTED_TESTS }}"
+                      "text": ":test_tube: *Executed tests:* ${{fromJson(steps.set_var.outputs.packageJson).stats.tests}}"
                     }
                   ]
                 },

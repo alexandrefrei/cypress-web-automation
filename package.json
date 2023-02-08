@@ -16,7 +16,6 @@
     "allure:clear:windows": "if exist allure-results rmdir /s /q allure-results && if exist allure-report rmdir /s /q allure-report",
     "allure:clear": "rm -r allure-results/ allure-report || true",
     "mochawesome:clear": "if exist cypress\\reports rmdir /s /q cypress\\reports && if exist cypress\\screenshots rmdir /s /q cypress\\screenshots ",
-    "combine:reports": "mochawesome-merge ./cypress/reports/mochawesome/*.json -o ./cypress/reports/combineReports.json",
     "prettier-check": "prettier --config .prettierrc --check cypress/**/*.{js,ts}",
     "prettier-write": "prettier --config .prettierrc --write cypress/**/*.{js,ts}",
     "lint-check": "eslint --config .eslintrc.json . --ext .ts",

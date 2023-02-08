@@ -18,21 +18,15 @@
   "allure": true,
   "reporter": "cypress-multi-reporters",
   "reporterOptions": {
-    "reporterEnabled": "mochawesome, cypress-mochawesome-reporter, mocha-junit-reporter",
+    "reporterEnabled": "cypress-mochawesome-reporter, mocha-junit-reporter",
     "cypressMochawesomeReporterReporterOptions": {
       "reportDir": "cypress/reports",
       "charts": true,
       "reportPageTitle": "EdgeIQ Test Report",
       "embeddedScreenshots": true,
-      "inlineAssets": true
-    },
-    "mochawesomeReporterOptions": {
-      "reportDir": "cypress/reports/mochawesome",
-      "quite": true,
-      "overwrite": false,
-      "html": false,
-      "json": true,
-      "code": false
+      "inlineAssets": true,
+      "saveJson": true,
+      "json": true
     },
     "mochaJunitReporterReporterOptions": {
       "mochaFile": "cypress/reports/junit/results-[hash].xml"

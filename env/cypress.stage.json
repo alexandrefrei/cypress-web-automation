@@ -5,6 +5,8 @@
     "user": "standard_user",
     "name": "Standard",
     "password": "secret_sauce",
+    "grepFilterSpecs": true,
+    "grepOmitFiltered": true,
     "db": {
       "host": "sql10.freemysqlhosting.net",
       "user": "sql10522347",

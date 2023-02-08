@@ -19,6 +19,7 @@ describe('Purchase Products', () => {
   before(() => {
     cy.login(USER, PASSWORD);
   });
+  //it('Purchase All T-Shirts', ['@smoke', '@buyProduct'] () => { This way we can add multiple tags
   it('Purchase All T-Shirts', { tags: '@smoke' }, () => {
     homePage.verifyPageOpened();
     //const listProducts = ["Sauce Labs Bolt T-Shirt", "Test.allTheThings() T-Shirt (Red)"];

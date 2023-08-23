@@ -29,7 +29,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
       #
-      - name: Get current date
+      - name: Get current date #When using $GITHUB_OUTPUT we need to have a job id, here we have id:date
         id: date
         run: |
           echo "date=$(date +'%Y-%m-%d %H-%M')" >> $GITHUB_OUTPUT
@@ -55,20 +55,29 @@ jobs:
         if: always()
         with:
           paths: cypress/reports/junit/**/*.xml
-          output: cypress/reports/results.html
       #
-      - name: Upload test summary
+      - name: Upload HTML test report #Uploading the mocha HTML report that is on index.html with the specific name cypress-test-report-2021-08-12, if no file found error
         uses: actions/upload-artifact@v3
+        if: always()
         with:
-          name: test-summary
-          path: cypress/reports/results.html
+          name: 'cypress-test-report-${{ steps.date.outputs.date }}'
+          path: cypress/reports/index.html
+          if-no-files-found: 'error'
+      #
+      - name: Get Test Information from mochawesome Report
+        id: readJson
+        if: always()
+        run: |
+          content=$(cat /home/runner/work/cypress-web-automation/cypress-web-automation/cypress/reports/index.json)
+          content="${content//'%'/'%25'}"
+          content="${content//$'\n'/'%0A'}"
+          content="${content//$'\r'/'%0D'}"
+          echo "readJson=$(content)" >> $GITHUB_OUTPUT
+
+      - name: Sending the info
+        run: echo "The selected color is ${{ fromJson(steps.readJson.outputs).stats.suites}}"
 
       - name: Adding markdown
         run: |
           echo "### Hello world! :rocket:" >> $GITHUB_STEP_SUMMARY
           echo "${{ steps.test_summary.outputs.passed }}"
-          echo "This is the lead in sentence for the list" >> $GITHUB_STEP_SUMMARY
-          echo "" >> $GITHUB_STEP_SUMMARY # this is a blank line
-          echo "- Lets add a bullet point" >> $GITHUB_STEP_SUMMARY
-          echo "- Lets add a second bullet point" >> $GITHUB_STEP_SUMMARY
-          echo "- How about a third one?" >> $GITHUB_STEP_SUMMARY

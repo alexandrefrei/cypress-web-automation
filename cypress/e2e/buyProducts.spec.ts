@@ -50,4 +50,65 @@ describe('Purchase Products', () => {
     checkoutCompletePage.verifyFinalMessage();
     checkoutCompletePage.verifyOrderDispatched();
   });
+
+  it('Purchase All T-Shirts II', { tags: '@smoke' }, () => {
+    homePage.verifyPageOpened();
+    //const listProducts = ["Sauce Labs Bolt T-Shirt", "Test.allTheThings() T-Shirt (Red)"];
+    //homePage.selectProductsByName(listProducts);
+    productArray = homePage.selectAllTShirt();
+    //homePage.numberOfProductAtCart(productArray.length.toString());
+
+    homePage.clickAtCart();
+
+    //Here is the way to get data from Database
+    //userData.verifyUserData();
+
+    //Here is a different way where we can use Page Object. All the actions are done in the spec file
+    //homePage.getCartButton().click();
+    //homePage.getNumberOfProduct().should('have.text', 4);
+
+    CartPage.verifyPageOpened();
+    CartPage.clickCheckout();
+
+    checkoutPage.verifyPageOpened();
+    checkoutPage.fillInformation();
+    checkoutPage.clickContinue();
+
+    CheckoutOverviewPage.verifyPageOpened();
+    CheckoutOverviewPage.clickFinish();
+
+    checkoutCompletePage.verifyPageOpened();
+    checkoutCompletePage.verifyFinalMessage();
+    checkoutCompletePage.verifyOrderDispatched();
+  });
+  it('Purchase All T-Shirts II', { tags: '@smoke' }, () => {
+    homePage.verifyPageOpened();
+    //const listProducts = ["Sauce Labs Bolt T-Shirt", "Test.allTheThings() T-Shirt (Red)"];
+    //homePage.selectProductsByName(listProducts);
+    productArray = homePage.selectAllTShirt();
+    //homePage.numberOfProductAtCart(productArray.length.toString());
+
+    homePage.clickAtCart();
+
+    //Here is the way to get data from Database
+    //userData.verifyUserData();
+
+    //Here is a different way where we can use Page Object. All the actions are done in the spec file
+    //homePage.getCartButton().click();
+    //homePage.getNumberOfProduct().should('have.text', 4);
+
+    CartPage.verifyPageOpened();
+    CartPage.clickCheckout();
+
+    checkoutPage.verifyPageOpened();
+    checkoutPage.fillInformation();
+    checkoutPage.clickContinue();
+
+    CheckoutOverviewPage.verifyPageOpened();
+    CheckoutOverviewPage.clickFinish();
+
+    checkoutCompletePage.verifyPageOpened();
+    checkoutCompletePage.verifyFinalMessageError();
+    checkoutCompletePage.verifyOrderDispatched();
+  });
 });

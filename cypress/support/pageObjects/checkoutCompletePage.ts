@@ -16,6 +16,9 @@ class CheckoutCompletePage {
     cy.get(FINAL_MESSAGE).should('have.text', 'Thank you for your order!');
   }
 
+  verifyFinalMessageError(): void {
+    cy.get(FINAL_MESSAGE).should('have.text', 'Error');
+  }
   verifyOrderDispatched(): void {
     cy.get(ORDER_DISPATCHED).should(
       'have.text',

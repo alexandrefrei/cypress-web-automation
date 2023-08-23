@@ -74,7 +74,7 @@ jobs:
         run: |
           echo "EXECUTION_TIME=$((${{fromJson(steps.mocha_report.outputs.json_file).stats.duration}} / 1000))" >> $GITHUB_ENV
           echo "SUITES=${{ fromJson(steps.mocha_report.outputs.json_file).stats.suites}}" >> $GITHUB_ENV
-          echo "PASSED=${{fromJson(steps.mocha_report.outputs.json_file).stats.passed}}" >> $GITHUB_OUTPUT
+          echo "PASS=${{fromJson(steps.mocha_report.outputs.json_file).stats.passes}}" >> $GITHUB_OUTPUT
 
       - name: Adding markdown
         run: |
@@ -82,4 +82,4 @@ jobs:
           echo "Number of Suites: ${{ steps.test_summary.outputs.passed }}" >> $GITHUB_STEP_SUMMARY
           echo "Execution time: $env.EXECUTION_TIME" >> $GITHUB_STEP_SUMMARY
           echo "SUITES: $env.SUITES"
-          echo "PASSED: ${{ steps.data.outputs.PASSED }}" >> $GITHUB_STEP_SUMMARY
+          echo "PASSED: ${{ steps.data.outputs.PASS }}" >> $GITHUB_STEP_SUMMARY

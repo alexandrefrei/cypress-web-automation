@@ -67,12 +67,12 @@ jobs:
       - name: Get Test Information from mochawesome Report
         id: read_json
         run: |
-          echo 'PACKAGE_JSON<<EOF' >> $GITHUB_ENV
-          cat /home/runner/work/cypress-web-automation/cypress-web-automation/cypress/reports/index.json >> $GITHUB_ENV
-          echo 'EOF' >> $GITHUB_ENV
+          echo 'PACKAGE_JSON<<EOF' >> $GITHUB_OUTPUT
+          cat /home/runner/work/cypress-web-automation/cypress-web-automation/cypress/reports/index.json >> $GITHUB_OUTPUT
+          echo 'EOF' >> $GITHUB_OUTPUT
 
       - name: Sending the info
-        run: echo "The selected color is ${{ fromJson(steps.read_json).stats.suites}}"
+        run: echo '${{ fromJson(steps.read_json.outputs).stats.suites}}'
 
       - name: Adding markdown
         run: |

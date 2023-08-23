@@ -65,13 +65,13 @@ jobs:
           if-no-files-found: 'error'
       #
       - name: Get Test Information from mochawesome Report
-        id: read_json
-        run: echo "package_json=$(jq -c . < /home/runner/work/cypress-web-automation/cypress-web-automation/cypress/reports/index.json)" >> $GITHUB_OUTPUT
-             
+        id: mocha_report
+        run: echo "json_file=$(jq -c . < /home/runner/work/cypress-web-automation/cypress-web-automation/cypress/reports/index.json)" >> $GITHUB_OUTPUT
+
       - name: Sending the info
-        run: echo '${{ fromJson(steps.read_json.outputs.package_json).stats.suites}}'
+        run: echo 'Number of Suites ${{ fromJson(steps.mocha_report.outputs.json_file).stats.suites}}'
 
       - name: Adding markdown
         run: |
-          echo "### Hello world! :rocket:" >> $GITHUB_STEP_SUMMARY
-          echo "${{ steps.test_summary.outputs.passed }}"
+          echo "### Test Report! :rocket:" >> $GITHUB_STEP_SUMMARY
+          echo "Number of Suites: ${{ steps.test_summary.outputs.passed }}" >> $GITHUB_STEP_SUMMARY

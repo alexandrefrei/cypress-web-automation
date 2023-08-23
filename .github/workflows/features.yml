@@ -50,34 +50,25 @@ jobs:
           command: npx cypress run --browser ${{github.event.inputs.browser}} --env configFile=${{github.event.inputs.environment}} --spec ${{github.event.inputs.specs}}
       #
       - name: Create Test Summary
+        id: test_summary
         uses: test-summary/action@v2.1
         if: always()
         with:
           paths: cypress/reports/junit/**/*.xml
+          output: cypress/reports/results.html
       #
-      - name: Upload HTML Test Report
+      - name: Upload test summary
         uses: actions/upload-artifact@v3
-        if: always()
         with:
-          name: 'cypress-test-report-${{ steps.date.outputs.date }}'
-          path: cypress/reports/inde.html
-          if-no-files-found: 'error'
-      #
-      - name: Get Test Information from mochawesome Report
-        id: set_var
-        if: always()
-        run: |
-          content=$(cat /home/runner/work/cypress-web-automation/cypress-web-automation/cypress/reports/inde.json)
-          content="${content//'%'/'%25'}"
-          content="${content//$'\n'/'%0A'}"
-          content="${content//$'\r'/'%0D'}"
-          echo "::set-output name=packageJson::$content"
+          name: test-summary
+          path: cypress/reports/results.html
 
-      # echo "packageJson=$content" >> $GITHUB_OUTPUT
-      # echo "::set-output name=packageJson::$content"
-      #
-      - name: Get test execution time
-        if: always()
-        env:
-          DURATION: ${{fromJson(steps.set_var.outputs.packageJson).stats.duration}}
-        run: echo "EXECUTION_TIME=$(($DURATION / 1000))" >> $GITHUB_ENV
+      - name: Adding markdown
+        run: |
+          echo "### Hello world! :rocket:" >> $GITHUB_STEP_SUMMARY
+          echo "${{ steps.test_summary.outputs.passed }}"
+          echo "This is the lead in sentence for the list" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY # this is a blank line
+          echo "- Lets add a bullet point" >> $GITHUB_STEP_SUMMARY
+          echo "- Lets add a second bullet point" >> $GITHUB_STEP_SUMMARY
+          echo "- How about a third one?" >> $GITHUB_STEP_SUMMARY

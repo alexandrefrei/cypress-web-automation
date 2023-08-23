@@ -81,5 +81,5 @@ jobs:
           echo "### Test Report! :rocket:" >> $GITHUB_STEP_SUMMARY
           echo "Number of Suites: ${{ steps.test_summary.outputs.passed }}" >> $GITHUB_STEP_SUMMARY
           echo "Execution time: $env.EXECUTION_TIME" >> $GITHUB_STEP_SUMMARY
-          echo "SUITES: $env.SUITES"
+          echo "SUITES: $env.SUITES" >> $GITHUB_STEP_SUMMARY
           echo "PASSED: ${{ steps.data.outputs.PASS }}" >> $GITHUB_STEP_SUMMARY

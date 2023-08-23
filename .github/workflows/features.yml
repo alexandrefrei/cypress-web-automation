@@ -54,23 +54,17 @@ jobs:
         with:
           paths: cypress/reports/junit/**/*.xml
       #
-      - name: Upload Screenshot
-        uses: actions/upload-artifact@v3
-        if: failure()
-        with:
-          name: 'cypress-screenshot-${{ steps.date.outputs.date }}'
-          path: cypress/screenshots
-      #
       - name: Upload HTML Test Report
         uses: actions/upload-artifact@v3
         if: failure()
         with:
           name: 'cypress-test-report-${{ steps.date.outputs.date }}'
-          path: cypress/reports/index.html
+          path: cypress/reports/inde.html
+          if-no-files-found: 'error'
       #
       - name: Get Test Information from mochawesome Report
         id: set_var
-        if: always()
+        if: success()
         run: |
           content=$(cat /home/runner/work/cypress-web-automation/cypress-web-automation/cypress/reports/index.json)
           content="${content//'%'/'%25'}"
@@ -81,23 +75,11 @@ jobs:
       # echo "packageJson=$content" >> $GITHUB_OUTPUT
       # echo "::set-output name=packageJson::$content"
       #
-      - name: Printing mochawesome report in the console log
-        if: always()
-        run: |
-          echo "Mochawesome Report JSON file:\n ${{steps.set_var.outputs.packageJson}}"
-
-      - name: Get Duration of Test Execution
-        if: always()
+      - name: Get test execution time
+        if: success()
         env:
-          #TOTAL_TESTS: ${{fromJson(steps.set_var.outputs.packageJson).stats.tests}}
-          #PENDING_TESTS: ${{fromJson(steps.set_var.outputs.packageJson).stats.pending}}
-
-          #This piece of code should be under Run
-          #echo "EXECUTED_TESTS=$(($TOTAL_TESTS - PENDING_TESTS))" >> $GITHUB_ENV
-
           DURATION: ${{fromJson(steps.set_var.outputs.packageJson).stats.duration}}
-        run: |
-          echo "EXECUTION_DURATION=$(($DURATION / 1000))" >> $GITHUB_ENV
+        run: echo "EXECUTION_TIME=$(($DURATION / 1000))" >> $GITHUB_ENV
       #
       - name: Slack Notification
         id: slack

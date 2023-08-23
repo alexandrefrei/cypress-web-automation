@@ -56,7 +56,7 @@ jobs:
       #
       - name: Upload HTML Test Report
         uses: actions/upload-artifact@v3
-        if: failure()
+        if: always()
         with:
           name: 'cypress-test-report-${{ steps.date.outputs.date }}'
           path: cypress/reports/inde.html
@@ -64,7 +64,7 @@ jobs:
       #
       - name: Get Test Information from mochawesome Report
         id: set_var
-        if: success()
+        if: always()
         run: |
           content=$(cat /home/runner/work/cypress-web-automation/cypress-web-automation/cypress/reports/index.json)
           content="${content//'%'/'%25'}"
@@ -76,7 +76,7 @@ jobs:
       # echo "::set-output name=packageJson::$content"
       #
       - name: Get test execution time
-        if: success()
+        if: always()
         env:
           DURATION: ${{fromJson(steps.set_var.outputs.packageJson).stats.duration}}
         run: echo "EXECUTION_TIME=$(($DURATION / 1000))" >> $GITHUB_ENV

@@ -66,7 +66,7 @@ jobs:
         id: set_var
         if: always()
         run: |
-          content=$(cat /home/runner/work/cypress-web-automation/cypress-web-automation/cypress/reports/index.json)
+          content=$(cat /home/runner/work/cypress-web-automation/cypress-web-automation/cypress/reports/inde.json)
           content="${content//'%'/'%25'}"
           content="${content//$'\n'/'%0A'}"
           content="${content//$'\r'/'%0D'}"

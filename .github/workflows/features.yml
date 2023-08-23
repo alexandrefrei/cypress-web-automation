@@ -64,14 +64,22 @@ jobs:
           path: cypress/reports/index.html
           if-no-files-found: 'error'
       #
-      - name: Get Test Information from mochawesome Report
+      - name: Reading JSON Mochawesome Report
         id: mocha_report
-        run: echo "json_file=$(jq -c . < /home/runner/work/cypress-web-automation/cypress-web-automation/cypress/reports/index.json)" >> $GITHUB_OUTPUT
+        run: |
+          echo "json_file=$(jq -c . < /home/runner/work/cypress-web-automation/cypress-web-automation/cypress/reports/index.json)" >> $GITHUB_OUTPUT
 
-      - name: Sending the info
-        run: echo 'Number of Suites ${{ fromJson(steps.mocha_report.outputs.json_file).stats.suites}}'
+      - name: Collecting data
+        id: data
+        run: |
+          echo "EXECUTION_TIME=$((${{fromJson(steps.mocha_report.outputs.json_file).stats.duration}} / 1000))" >> $GITHUB_ENV
+          echo "SUITES=${{ fromJson(steps.mocha_report.outputs.json_file).stats.suites}}" >> $GITHUB_ENV
+          echo "PASSED=${{fromJson(steps.mocha_report.outputs.json_file).stats.passed}}" >> $GITHUB_OUTPUT
 
       - name: Adding markdown
         run: |
           echo "### Test Report! :rocket:" >> $GITHUB_STEP_SUMMARY
           echo "Number of Suites: ${{ steps.test_summary.outputs.passed }}" >> $GITHUB_STEP_SUMMARY
+          echo "Execution time: $env.EXECUTION_TIME" >> $GITHUB_STEP_SUMMARY
+          echo "SUITES: $env.SUITES"
+          echo "PASSED: ${{ steps.data.outputs.PASSED }}" >> $GITHUB_STEP_SUMMARY

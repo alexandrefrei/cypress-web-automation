@@ -65,17 +65,14 @@ jobs:
           if-no-files-found: 'error'
       #
       - name: Get Test Information from mochawesome Report
-        id: readJson
-        if: always()
+        id: read_json
         run: |
-          content=$(cat /home/runner/work/cypress-web-automation/cypress-web-automation/cypress/reports/index.json)
-          content="${content//'%'/'%25'}"
-          content="${content//$'\n'/'%0A'}"
-          content="${content//$'\r'/'%0D'}"
-          echo "readJson=$(content)" >> $GITHUB_OUTPUT
+          echo 'PACKAGE_JSON<<EOF' >> $GITHUB_ENV
+          cat /home/runner/work/cypress-web-automation/cypress-web-automation/cypress/reports/index.json >> $GITHUB_ENV
+          echo 'EOF' >> $GITHUB_ENV
 
       - name: Sending the info
-        run: echo "The selected color is ${{ fromJson(steps.readJson.outputs).stats.suites}}"
+        run: echo "The selected color is ${{ fromJson(steps.read_json).stats.suites}}"
 
       - name: Adding markdown
         run: |

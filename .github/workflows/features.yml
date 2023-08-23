@@ -62,6 +62,19 @@ jobs:
           path: cypress/reports/inde.html
           if-no-files-found: 'error'
       #
+      - name: Verify if file exists
+        uses: jiangxin/file-exists-action@v1
+        with:
+          path: '/home/runner/work/cypress-web-automation/cypress-web-automation/cypress/reports/index.json'
+      #
+      - name: Verificar se o arquivo existe
+        run: |
+          if [ -f "/home/runner/work/cypress-web-automation/cypress-web-automation/cypress/reports/index.json" ]; then
+            echo "O arquivo existe."
+          else
+            echo "O arquivo não existe."
+            exit 1
+       #     
       - name: Get Test Information from mochawesome Report
         id: set_var
         if: success()

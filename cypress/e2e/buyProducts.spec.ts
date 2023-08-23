@@ -22,7 +22,7 @@ describe('Purchase Products', () => {
   //it('Purchase All T-Shirts', ['@smoke', '@buyProduct'] () => { This way we can add multiple tags
   it('Purchase All T-Shirts', { tags: '@smoke' }, () => {
     homePage.verifyPageOpened();
-    cy.wait(20000);
+    cy.wait(50000);
     //const listProducts = ["Sauce Labs Bolt T-Shirt", "Test.allTheThings() T-Shirt (Red)"];
     //homePage.selectProductsByName(listProducts);
     productArray = homePage.selectAllTShirt();
@@ -60,7 +60,7 @@ describe('Purchase Products', () => {
     //homePage.numberOfProductAtCart(productArray.length.toString());
 
     homePage.clickAtCart();
-    cy.wait(10000);
+    cy.wait(20000);
     //Here is the way to get data from Database
     //userData.verifyUserData();
 
@@ -90,7 +90,7 @@ describe('Purchase Products', () => {
     //homePage.numberOfProductAtCart(productArray.length.toString());
 
     homePage.clickAtCart();
-    cy.wait(10000);
+    cy.wait(20000);
 
     //Here is the way to get data from Database
     userData.verifyUserData();
@@ -122,8 +122,7 @@ describe('Purchase Products', () => {
     //homePage.numberOfProductAtCart(productArray.length.toString());
 
     homePage.clickAtCart();
-    7;
-    cy.wait(10000);
+    cy.wait(20000);
 
     //Here is the way to get data from Database
     userData.verifyUserData();
@@ -155,7 +154,7 @@ describe('Purchase Products', () => {
     //homePage.numberOfProductAtCart(productArray.length.toString());
 
     homePage.clickAtCart();
-    cy.wait(10000);
+    cy.wait(20000);
 
     //Here is the way to get data from Database
     userData.verifyUserData();
@@ -187,7 +186,7 @@ describe('Purchase Products', () => {
     //homePage.numberOfProductAtCart(productArray.length.toString());
 
     homePage.clickAtCart();
-    cy.wait(10000);
+    cy.wait(20000);
 
     //Here is the way to get data from Database
     userData.verifyUserData();

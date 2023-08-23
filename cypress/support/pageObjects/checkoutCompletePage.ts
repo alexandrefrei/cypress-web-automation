@@ -13,7 +13,7 @@ class CheckoutCompletePage {
   }
 
   verifyFinalMessage(): void {
-    cy.get(FINAL_MESSAGE).should('have.text', 'THANK YOU FOR YOUR ORDER');
+    cy.get(FINAL_MESSAGE).should('have.text', 'Thank you for your order!');
   }
 
   verifyOrderDispatched(): void {

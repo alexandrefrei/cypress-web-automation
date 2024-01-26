@@ -55,7 +55,7 @@ jobs:
         run: |
           if [ "${{ github.event.inputs.environment }}" == "stage" ]; then
             echo "stage ENV"
-          elif [ "${{ github.event.inputs.environment }}" == prod" ]; then
+          elif [ "${{ github.event.inputs.environment }}" == "prod" ]; then
             echo "prod ENV"
           else [ "${{ github.event.inputs.environment  }}" == "dev" ];
             echo "dev ENV"

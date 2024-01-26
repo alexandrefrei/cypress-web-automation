@@ -34,15 +34,15 @@ jobs:
         run: |
           echo "date=$(date +'%Y-%m-%d %H-%M')" >> $GITHUB_OUTPUT
 
-      # - name: Conditional to run on STAGE - Copy data from Secrets to cypress.${{github.event.inputs.environment}}.json
-      #   if: github.event.inputs.environment == 'stage'
-      #   run: |
-      #     echo '${{ secrets.CYPRESS_ENV_STAGE }}' > env/cypress.${{github.event.inputs.environment}}.json
+      - name: Conditional to run on STAGE - Copy data from Secrets to cypress.${{github.event.inputs.environment}}.json
+        if: ${{github.event.inputs.environment}} == 'stage'
+        run: |
+           echo '${{ secrets.CYPRESS_ENV_STAGE }}' > env/cypress.${{github.event.inputs.environment}}.json
 
-      # - name: Conditional to run on PROD - Copy data from Secrets to cypress.env.json
-      #   if: github.event.inputs.environment == 'prod'
-      #   run:
-      #     echo "RUNNING PROD"
+      - name: Conditional to run on PROD - Copy data from Secrets to cypress.env.json
+        if: github.event.inputs.environment == 'prod'
+        run:
+           echo "RUNNING PROD"
 
       - name: Cypress run 🧪
         uses: cypress-io/github-action@v5
@@ -68,14 +68,19 @@ jobs:
         id: mocha_report
         run: |
           echo "json_file=$(jq -c . < /home/runner/work/cypress-web-automation/cypress-web-automation/cypress/reports/index.json)" >> $GITHUB_OUTPUT
-
+      #
       - name: Collecting data
         id: data
         run: |
+          echo "EXECUTION_DATE=$((${{fromJson(steps.date.outputs.date)}}))" >> $GITHUB_ENV
           echo "EXECUTION_TIME=$((${{fromJson(steps.mocha_report.outputs.json_file).stats.duration}} / 1000))" >> $GITHUB_ENV
           echo "SUITES=${{ fromJson(steps.mocha_report.outputs.json_file).stats.suites}}" >> $GITHUB_ENV
-          echo "PASS=${{fromJson(steps.mocha_report.outputs.json_file).stats.passes}}" >> $GITHUB_OUTPUT
-
+          echo "EXECUTED_TESTS=${{ fromJson(steps.mocha_report.outputs.json_file).stats.tests}}" >> $GITHUB_ENV
+          echo "PASS=${{fromJson(steps.mocha_report.outputs.json_file).stats.passes}}">> $GITHUB_ENV
+          echo "FAIL=${{fromJson(steps.mocha_report.outputs.json_file).stats.failues}}" >> $GITHUB_ENV
+          echo "PASS_PERCENTAGE=${{fromJson(steps.mocha_report.outputs.json_file).stats.passPercent}}" >> $GITHUB_ENV
+          echo "FAIL_PERCENTAGE=$((100 - ${{fromJson(steps.mocha_report.outputs.json_file).stats.passPercent}}))" >> $GITHUB_ENV
+      #
       - name: Adding markdown
         run: |
           echo "### Test Report! :rocket:" >> $GITHUB_STEP_SUMMARY
@@ -83,3 +88,90 @@ jobs:
           echo "Execution time: $EXECUTION_TIME seconds" >> $GITHUB_STEP_SUMMARY
           echo "SUITES: $SUITES" >> $GITHUB_STEP_SUMMARY
           echo "PASSED: ${{ steps.data.outputs.PASS }}" >> $GITHUB_STEP_SUMMARY
+      #
+      - name: Slack Notification
+        id: slack
+        uses: slackapi/slack-github-action@v1.23.0
+        if: always()
+        with:
+            channel-id: '34234'
+            payload: |
+              {
+                "text": "GitHub Action",
+                "blocks": [
+                  {
+                    "type": "header",
+                    "text": {
+                      "type": "plain_text",
+                      "text": "Cypress Workflow: Feature Job :rocket:",
+                      "emoji": true
+                    }
+                  },
+                  {
+                    "type": "divider"
+                  },
+                  {
+                    "type": "section",
+                    "fields": [
+                      {
+                        "type": "mrkdwn",
+                        "text": ":calendar: *Executed Date:* ${{ steps.date.outputs.date }}"
+                      }
+                    ]
+                  },
+                  {
+                    "type": "section",
+                    "fields": [
+                      {
+                        "type": "mrkdwn",
+                        "text": ":stopwatch: *Total Execution Time:* ${{ env.EXECUTION_TIME }}"
+                      }
+                    ]
+                  },
+                  {
+                    "type": "section",
+                    "fields": [
+                      {
+                        "type": "mrkdwn",
+                        "text": ":bar_chart: *Number of Suites:* ${{fromJson(steps.set_var.outputs.packageJson).stats.suites}}"
+                      },
+                      {
+                        "type": "mrkdwn",
+                        "text": ":test_tube: *Executed tests:* ${{fromJson(steps.set_var.outputs.packageJson).stats.tests}}"
+                      }
+                    ]
+                  },
+                  {
+                    "type": "section",
+                    "fields": [
+                      {
+                        "type": "mrkdwn",
+                        "text": ":white_check_mark: *Passed Tests:* ${{fromJson(steps.set_var.outputs.packageJson).stats.passes}}"
+                      },
+                      {
+                        "type": "mrkdwn",
+                        "text": ":X: *Failed Tests:* ${{fromJson(steps.set_var.outputs.packageJson).stats.failures}}"
+                      }
+                    ]
+                  },
+                  {
+                    "type": "section",
+                    "text": {
+                      "type": "mrkdwn",
+                      "text": "See results at:"
+                    },
+                    "accessory": {
+                      "type": "button",
+                      "text": {
+                        "type": "plain_text",
+                        "text": "Gitub Job :bug:",
+                        "emoji": true
+                      },
+                      "url": "https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}",
+                      "action_id": "button-action"
+                    }
+                  }
+                ]
+              }
+          env:
+            SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}

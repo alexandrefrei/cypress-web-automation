@@ -15,6 +15,19 @@ on:
         description: 'Add the spec file path that you want to run:'
         default: 'cypress/e2e/*.spec.ts'
         required: true
+      env:
+        type: environment
+        description: Select the environment
+      boolean:
+        type: boolean
+        description: True or False
+      choice:
+        type: choice
+        description: Make a choice
+        options:
+          - foo
+          - bar
+          - baz
 jobs:
   feature-job:
     name: Running tests on feature mode
@@ -54,6 +67,12 @@ jobs:
       - name: Conditional to run on PROD - Copy data from Secrets to cypress.env.json
         if: github.event.inputs.environment == 'prod'
         run: echo "RUNNING PROD"
+
+      - name: greet
+        run: |
+          echo "environment is ${{ github.event.inputs.env }} / ${{ inputs.env }}"
+          echo "boolean is ${{ github.event.inputs.boolean }}" / ${{ inputs.boolean }} 
+          echo "choice is ${{ github.event.inputs.choice }}" / ${{ inputs.choice }}
 
       - name: Cypress run 🧪
         uses: cypress-io/github-action@v6

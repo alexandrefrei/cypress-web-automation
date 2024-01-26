@@ -6,7 +6,7 @@
   "scripts": {
     "cy:open:stg": "cypress open --e2e --browser chrome --env configFile=stage",
     "cy:open:qa": "cypress open --e2e --browser chrome --env configFile=qa",
-    "cy:run": "cypress run --browser chrome --env configFile=stage allure=true --spec cypress/e2e/buyProducts.spec.ts",
+    "cy:run": "cypress run --browser chrome --env configFile=stage --spec cypress/e2e/buyProducts.spec.ts",
     "cy:run:CI": "cypress run --browser chrome --env configFile=GitHub",
     "cy:smoke": "npx cypress run --browser chrome --env configFile=stage,grepTags=@smoke",
     "cy:run:allure": "cypress run --browser chrome --spec cypress/e2e/buyProducts.spec.ts --env configFile=stage allure=true",

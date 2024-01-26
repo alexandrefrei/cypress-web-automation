@@ -15,19 +15,16 @@ on:
         description: 'Add the spec file path that you want to run:'
         default: 'cypress/e2e/*.spec.ts'
         required: true
-      env:
-        type: environment
-        description: Select the environment
       boolean:
         type: boolean
         description: True or False
       choice:
         type: choice
-        description: Make a choice
+        description: Select the env
         options:
-          - foo
-          - bar
-          - baz
+          - STAGE
+          - INTEGRATION
+          - PROD
 jobs:
   feature-job:
     name: Running tests on feature mode

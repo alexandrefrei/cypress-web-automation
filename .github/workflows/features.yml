@@ -54,7 +54,7 @@ jobs:
         run: echo "RUNNING PROD"
 
       - name: Cypress run 🧪
-        uses: cypress-io/github-action@v5
+        uses: cypress-io/github-action@v6
         with:
           command: npx cypress run --browser ${{github.event.inputs.browser}} --env configFile=${{github.event.inputs.environment}} --spec ${{github.event.inputs.specs}}
       #
@@ -66,7 +66,7 @@ jobs:
           paths: cypress/reports/junit/**/*.xml
       #
       - name: Upload HTML test report #Uploading the mocha HTML report that is on index.html with the specific name cypress-test-report-2021-08-12, if no file found error
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         if: always()
         with:
           name: 'cypress-test-report-${{ steps.date.outputs.date }}'

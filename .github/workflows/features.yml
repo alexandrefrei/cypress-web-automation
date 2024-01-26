@@ -18,7 +18,7 @@ on:
       boolean:
         type: boolean
         description: True or False
-      choice:
+      env:
         type: choice
         description: Select the env
         options:
@@ -68,7 +68,7 @@ jobs:
       - name: greet
         run: |
           echo "boolean is ${{ github.event.inputs.boolean }}" / ${{ inputs.boolean }} 
-          echo "choice is ${{ github.event.inputs.choice }}" / ${{ inputs.choice }}
+          echo "choice is ${{ github.event.inputs.env }}" / ${{ inputs.env }}
 
       - name: Cypress run 🧪
         uses: cypress-io/github-action@v6

@@ -36,19 +36,18 @@ jobs:
           echo "date=$(date +'%Y-%m-%d %H-%M')" >> $GITHUB_OUTPUT
 
       - name: Conditional to run on STAGE - Copy data from Secrets to cypress.${{github.event.inputs.environment}}.json
-        if: github.event.inputs.environment == 'stage'
+        if: ${{github.event.inputs.environment}} == 'stage'
         run: |
           echo '${{ secrets.CYPRESS_ENV_STAGE }}' > env/cypress.${{github.event.inputs.environment}}.json
 
-      - name: Second Test
-        if: ${{github.event.inputs.environment}} == 'stage'
+      - name: Select Environment
+        id: select-environment
         run: |
-          echo 'Second teste'
-
-      - name: Thrid Test
-        if: ${{github.event.inputs.environment == 'stage'}}
-        run: |
-          echo 'Thrid Test'
+          if [ "${{ github.event.inputs.environment }}" == "stage" ]; then
+            echo "stage ENV"
+          else [ "${{ github.event.inputs.environment  }}" == "dev" ]; then
+            echo "dev ENV"
+          fi
 
       - name: Conditional to run on PROD - Copy data from Secrets to cypress.env.json
         if: github.event.inputs.environment == 'prod'

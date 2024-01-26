@@ -36,14 +36,14 @@ jobs:
           echo "date=$(date +'%Y-%m-%d %H-%M')" >> $GITHUB_OUTPUT
 
       - name: Conditional to run on STAGE - Copy data from Secrets to cypress.${{github.event.inputs.environment}}.json
-      #   if: github.event.inputs.environment == 'stage'
+        if: github.event.inputs.environment == 'stage'
         run: |
-      #     echo '${{ secrets.CYPRESS_ENV_STAGE }}' > env/cypress.${{github.event.inputs.environment}}.json
+           echo '${{ secrets.CYPRESS_ENV_STAGE }}' > env/cypress.${{github.event.inputs.environment}}.json
 
       - name: Conditional to run on PROD - Copy data from Secrets to cypress.env.json
         if: github.event.inputs.environment == 'prod'
-      #   run:
-      #     echo "RUNNING PROD"
+        run:
+           echo "RUNNING PROD"
 
       - name: Cypress run 🧪
         uses: cypress-io/github-action@v5

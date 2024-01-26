@@ -28,7 +28,7 @@ jobs:
     steps:
       #
       - name: Checkout
-        uses: actions/checkout@v5
+        uses: actions/checkout@v4
       #
       - name: Get current date #When using $GITHUB_OUTPUT we need to have a job id, here we have id:date
         id: date
@@ -90,89 +90,89 @@ jobs:
           echo "SUITES: $SUITES" >> $GITHUB_STEP_SUMMARY
           echo "PASSED: ${{ steps.data.outputs.PASS }}" >> $GITHUB_STEP_SUMMARY
       #
-      - name: Slack Notification
-        id: slack
-        uses: slackapi/slack-github-action@v1.23.0
-        if: always()
-        with:
-            channel-id: '34234'
-            payload: |
-              {
-                "text": "GitHub Action",
-                "blocks": [
-                  {
-                    "type": "header",
-                    "text": {
-                      "type": "plain_text",
-                      "text": "Cypress Workflow: Feature Job :rocket:",
-                      "emoji": true
-                    }
-                  },
-                  {
-                    "type": "divider"
-                  },
-                  {
-                    "type": "section",
-                    "fields": [
-                      {
-                        "type": "mrkdwn",
-                        "text": ":calendar: *Executed Date:* ${{ steps.date.outputs.date }}"
-                      }
-                    ]
-                  },
-                  {
-                    "type": "section",
-                    "fields": [
-                      {
-                        "type": "mrkdwn",
-                        "text": ":stopwatch: *Total Execution Time:* ${{ env.EXECUTION_TIME }}"
-                      }
-                    ]
-                  },
-                  {
-                    "type": "section",
-                    "fields": [
-                      {
-                        "type": "mrkdwn",
-                        "text": ":bar_chart: *Number of Suites:* ${{fromJson(steps.set_var.outputs.packageJson).stats.suites}}"
-                      },
-                      {
-                        "type": "mrkdwn",
-                        "text": ":test_tube: *Executed tests:* ${{fromJson(steps.set_var.outputs.packageJson).stats.tests}}"
-                      }
-                    ]
-                  },
-                  {
-                    "type": "section",
-                    "fields": [
-                      {
-                        "type": "mrkdwn",
-                        "text": ":white_check_mark: *Passed Tests:* ${{fromJson(steps.set_var.outputs.packageJson).stats.passes}}"
-                      },
-                      {
-                        "type": "mrkdwn",
-                        "text": ":X: *Failed Tests:* ${{fromJson(steps.set_var.outputs.packageJson).stats.failures}}"
-                      }
-                    ]
-                  },
-                  {
-                    "type": "section",
-                    "text": {
-                      "type": "mrkdwn",
-                      "text": "See results at:"
-                    },
-                    "accessory": {
-                      "type": "button",
-                      "text": {
-                        "type": "plain_text",
-                        "text": "Gitub Job :bug:",
-                        "emoji": true
-                      },
-                      "url": "https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}",
-                      "action_id": "button-action"
-                    }
-                  }
-                ]
-              }
-          env:
-            SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
+#      - name: Slack Notification
+#        id: slack
+#        uses: slackapi/slack-github-action@v1.23.0
+#        if: always()
+#        with:
+#            channel-id: '34234'
+#            payload: |
+#              {
+#                "text": "GitHub Action",
+#                "blocks": [
+#                  {
+#                    "type": "header",
+#                    "text": {
+#                      "type": "plain_text",
+#                      "text": "Cypress Workflow: Feature Job :rocket:",
+#                      "emoji": true
+#                    }
+#                  },
+#                  {
+#                    "type": "divider"
+#                  },
+#                  {
+#                    "type": "section",
+#                    "fields": [
+#                      {
+#                        "type": "mrkdwn",
+#                        "text": ":calendar: *Executed Date:* ${{ steps.date.outputs.date }}"
+#                      }
+#                    ]
+#                  },
+#                  {
+#                    "type": "section",
+#                    "fields": [
+#                      {
+#                        "type": "mrkdwn",
+#                        "text": ":stopwatch: *Total Execution Time:* ${{ env.EXECUTION_TIME }}"
+#                      }
+#                    ]
+#                  },
+#                  {
+#                    "type": "section",
+#                    "fields": [
+#                      {
+#                        "type": "mrkdwn",
+#                        "text": ":bar_chart: *Number of Suites:* ${{fromJson(steps.set_var.outputs.packageJson).stats.suites}}"
+#                      },
+#                      {
+#                        "type": "mrkdwn",
+#                        "text": ":test_tube: *Executed tests:* ${{fromJson(steps.set_var.outputs.packageJson).stats.tests}}"
+#                      }
+#                    ]
+#                  },
+#                  {
+#                    "type": "section",
+#                    "fields": [
+#                      {
+#                        "type": "mrkdwn",
+#                        "text": ":white_check_mark: *Passed Tests:* ${{fromJson(steps.set_var.outputs.packageJson).stats.passes}}"
+#                      },
+#                      {
+#                        "type": "mrkdwn",
+#                        "text": ":X: *Failed Tests:* ${{fromJson(steps.set_var.outputs.packageJson).stats.failures}}"
+#                      }
+#                    ]
+#                  },
+#                  {
+#                    "type": "section",
+#                    "text": {
+#                      "type": "mrkdwn",
+#                      "text": "See results at:"
+#                    },
+#                    "accessory": {
+#                      "type": "button",
+#                      "text": {
+#                        "type": "plain_text",
+#                        "text": "Gitub Job :bug:",
+#                        "emoji": true
+#                      },
+#                      "url": "https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}",
+#                      "action_id": "button-action"
+#                    }
+#                  }
+#                ]
+#              }
+#          env:
+#            SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}

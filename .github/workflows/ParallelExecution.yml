@@ -19,7 +19,7 @@ jobs:
     steps:
       #
       - name: Checkout
-        uses: actions/checkout@v5
+        uses: actions/checkout@
       #
       - name: Copying data to cypress.env.json
         run: cp env/cypress.${{env.DEFAULT_ENV}}.json cypress.env.json

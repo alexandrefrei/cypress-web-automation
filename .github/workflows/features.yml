@@ -67,7 +67,6 @@ jobs:
 
       - name: greet
         run: |
-          echo "environment is ${{ github.event.inputs.env }} / ${{ inputs.env }}"
           echo "boolean is ${{ github.event.inputs.boolean }}" / ${{ inputs.boolean }} 
           echo "choice is ${{ github.event.inputs.choice }}" / ${{ inputs.choice }}
 

@@ -21,6 +21,7 @@ describe('Purchase Products', () => {
   });
   //it('Purchase All T-Shirts', ['@smoke', '@buyProduct'] () => { This way we can add multiple tags
   it('Purchase All T-Shirts', { tags: '@smoke' }, () => {
+    await allure.parentSuite('Buy Product')
     homePage.verifyPageOpened();
 
     //const listProducts = ["Sauce Labs Bolt T-Shirt", "Test.allTheThings() T-Shirt (Red)"];
